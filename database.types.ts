@@ -14,52 +14,56 @@ export interface Database {
     Tables: {
       country: {
         Row: {
-          countryNo: number;
-          countryCode: string;
-          countryName: string;
+          countryno: number;
+          countrycode: string;
+          countryname: string;
           currency: string;
         };
       };
 
       users: {
         Row: {
-          userId: string;
-          userPw: string;
+          id: string;
+          email: string;
+          userpw: string;
           nickname: string;
-          userProfile: string;
+          userprofile: string;
           role: Enumerator;
-          passNum: number;
-          createdAt: Date;
+          createdat: Date;
         };
         Insert: {
-          userId: string;
-          userPw: string;
+          id: string;
+          email: string;
+          userpw: string;
           nickname: string | null;
-          userProfile: string | null;
+          userprofile: string | null;
           role: Enumerator;
-          passNum: number | null;
-          createdAt: Date;
+          createdat: Date;
         };
         Update: {
-          userId?: never;
+          id?: never;
+          email?: never; 
           userPw: string;
           nickname: string | null;
-          userProfile: string | null;
+          userprofile: string | null;
           role?: never;
-          passNum: number | null;
-          createdAt?: never;
+          createdat?: never;
         };
       };
 
       passport: {
         Row: {
-          passNum: string;
-          passName: string;
-          countryNo: number;
-          issueDate: Date;
-          expireDate: Date;
+          passid: string;
+          userid: string;
+          passnum: string;
+          passname: string;
+          countryno: number;
+          issuedate: Date;
+          expiredate: Date;
         };
         Insert: {
+          passid: string;
+          userid: string;
           passNum: string | null;
           passName: string | null;
           countryNo: number | null;
@@ -67,81 +71,83 @@ export interface Database {
           expireDate: Date | null;
         };
         Update: {
-          passNum: string | null;
-          passName: string | null;
-          countryNo: number | null;
-          issueDate: Date | null;
-          expireDate: Date | null;
+          passid?: never;
+          userid: string;
+          passnum: string | null;
+          passname: string | null;
+          countryno: number | null;
+          issuedate: Date | null;
+          expiredate: Date | null;
         };
       };
 
       schedule: {
         Row: {
-          scheduleId: number;
-          tripId: number;
-          scheduleDate: Date;
+          scheduleid: number;
+          tripid: number;
+          scheduledate: Date;
           budget: number;
-          scheduleContext: string;
-          scheduleNo: number;
+          schedulecontext: string;
+          scheduleno: number;
         };
         Insert: {
-          scheduleId?: never;
-          tripId?: never;
-          scheduleDate: Date;
+          scheduleid?: never;
+          tripid?: never;
+          scheduledate: Date;
           budget: number | null;
-          scheduleContext: string | null;
-          scheduleNo: number;
+          schedulecontext: string | null;
+          scheduleno: number;
         };
         Update: {
-          scheduleId?: never;
-          tripId?: never;
-          scheduleDate: Date;
+          scheduleid?: never;
+          tripid?: never;
+          scheduledate: Date;
           budget: number | null;
-          scheduleContext: string | null;
-          scheduleNo: number;
+          schedulecontext: string | null;
+          scheduleno: number;
         };
       };
 
       trip: {
         Row: {
-          tripId: number;
-          userId: string;
-          countryNo: number;
-          localName: string;
-          startDate: Date;
-          endDate: Date;
+          tripid: number;
+          userid: string;
+          countryno: number;
+          localname: string;
+          startdate: Date;
+          enddate: Date;
           address: string;
           title: string;
-          tripImg: string;
-          budgetTotal: number;
+          tripimg: string;
+          budgettotal: number;
           tag: string;
           memo: string;
         };
         insert: {
-          tripId?: never;
-          userId: string;
-          countryNo: number;
-          localName: string | null;
-          startDate: Date | null;
-          endDate: Date | null;
+          tripid?: never;
+          userid: string;
+          countryno: number;
+          localname: string | null;
+          startdate: Date | null;
+          enddate: Date | null;
           address: string | null;
           title: string | null;
-          tripImg: string | null;
-          budgetTotal: number | null;
+          tripimg: string | null;
+          budgettotal: number | null;
           tag: string | null;
           memo: string | null;
         };
         update: {
-          tripId?: never;
-          userId?: never;
-          countryNo: number;
-          localName: string | null;
-          startDate: Date | null;
-          endDate: Date | null;
+          tripid?: never;
+          userid?: never;
+          countryno: number;
+          localname: string | null;
+          startdate: Date | null;
+          enddate: Date | null;
           address: string | null;
           title: string | null;
-          tripImg: string | null;
-          budgetTotal: number | null;
+          tripimg: string | null;
+          budgettotal: number | null;
           tag: string | null;
           memo: string | null;
         };
