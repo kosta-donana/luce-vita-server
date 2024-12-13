@@ -39,7 +39,7 @@ router.post("/social", async (req: Request, res: Response) => {
 });
 
 // 클라이언트에서 세션 데이터 조회
-router.get("/ath/callback", async (req: Request, res: Response) => {
+router.get("/auth/callback", async (req: Request, res: Response) => {
   const { access_token, refresh_token } = req.body;
 
   if (!access_token || !refresh_token) {

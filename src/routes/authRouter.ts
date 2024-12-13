@@ -6,7 +6,7 @@ import { setAuthCookies } from "../utils/cookie";
 const router = Router();
 
 // 회원가입 라우터
-router.post("/auth", async (req: Request, res: Response) => {
+router.post("/", async (req: Request, res: Response) => {
   const { email, password } = req.body;
   console.log(email, password);
 
@@ -31,7 +31,7 @@ router.post("/verify", async (req: Request, res: Response) => {
     if (access_token && refresh_token) {
       setAuthCookies(res, { access_token, refresh_token });
     } else {
-      res.status(400).json({ success: false, message: "Invalid Token error" });
+      res.status(400).json({ success: false, message: "invalid Tokens" });
     }
     // data 반환
     res.status(200).json({ success: true, data: verified });
