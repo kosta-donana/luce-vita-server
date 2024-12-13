@@ -18,7 +18,8 @@
   "homepage": "https://github.com/kosta-donana/luce-vita-server#readme",
   "description": "",
   "dependencies": {
-    "@supabase/supabase-js": "^2.47.3",
+    "@supabase/supabase-js": "^2.47.6",
+    "cors": "^2.8.5",
     "dotenv": "^16.4.7",
     "express": "^4.21.2"
   },
