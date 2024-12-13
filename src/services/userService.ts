@@ -1,5 +1,4 @@
 import { userModel } from "../models/userModel";
-import supabase from "../supabaseClients";
 
 class UserService {
   // 여권번호 조회

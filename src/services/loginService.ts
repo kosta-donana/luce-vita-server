@@ -50,15 +50,16 @@ class LoginService {
   }
 }
 
-class Logout {
+class LogoutService {
   async logout() {
     const { error } = await supabase.auth.signOut();
 
     if (error) {
-      console.log("failt to logout", error.message);
+      console.log("fail to logout", error.message);
     }
   }
 }
 
 const loginService = new LoginService();
-export { loginService };
+const logoutService = new LogoutService();
+export { loginService, logoutService };

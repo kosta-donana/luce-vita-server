@@ -8,24 +8,30 @@ class VerifyUserService {
 
     // DB에서 입력된 이메일 존재 시 배열 반환, 없으면 빈 배열 반환
     const exist = await userModel.fetchUserEmail(email);
-    console.log(exist);
+    console.log("fetchUserEmail 반환값: ", exist);
+    console.log(typeof exist, Array.isArray(exist));
 
+    // 유저가 이미 등록된 경우
+    console.log("Checking includes...");
     if (exist.includes(email)) {
       console.log("이미 등록된 유저입니다.");
       return;
     }
-    // DB에 존재하지 않는 경우, auth.users 조회
-    this.invalidUser(email, password);
+
+    // 유저가 존재하지 않는 경우
+    console.log("유저가 존재하지 않습니다. OTP 송신 절차로 이동합니다.");
+    await this.invalidUser(email, password); // 이 함수가 호출되어야 함
   }
 
+  // 미등록 유저 처리
   async invalidUser(email: string, password: string) {
-    console.log(email, password);
+    console.log("invalidUser 호출됨:", email, password);
     // auth.users 테이블 조회 > 존재하면 data 반환
     const { data, error } = await supabase.rpc("get_user_by_email", { user_email: email });
 
     if (error) {
-      console.log("유저 조회 실패: 유효하지 않은 이메일", error.message);
-      throw new Error("User Info not found");
+      console.error("RPC 호출 실패:", error.message);
+      throw new Error("RPC Error: " + error.message);
     }
     console.log("rpc result: ", data);
 
@@ -40,6 +46,10 @@ class VerifyUserService {
       console.log("유저 삭제 완료");
     }
 
+    if (!data || data.length === 0) {
+      console.log("삭제할 유저가 없습니다. OTP 요청을 송신합니다.");
+    }
+
     // OTP 번호 요청
     const otpService = new OtpService();
     otpService.sendOtp(email, password);
@@ -50,8 +60,8 @@ class OtpService {
   async sendOtp(email: string, password: string) {
     console.log(email, password);
     const { data, error } = await supabase.auth.signUp({
-      email,
-      password,
+      email: email,
+      password: password,
     });
 
     if (error) {
