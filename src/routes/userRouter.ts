@@ -21,7 +21,20 @@ router.post("/:user_id/deactivate", async (req, res) => {
   try {
     const user_id = req.params.user_id;
     const deletedUser = await userService.deleteUser(user_id);
+
     res.status(200).json({ success: true, data: deletedUser });
+  } catch (error) {
+    handleError(res, error);
+  }
+});
+
+router.get("/validate/:nickname", async (req, res) => {
+  const nickname = req.params.nickname;
+
+  try {
+    const { available, message } = await userService.isNicknameAvailable(nickname);
+
+    res.json({ success: true, available, message });
   } catch (error) {
     handleError(res, error);
   }
