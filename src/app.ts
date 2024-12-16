@@ -1,17 +1,22 @@
 import dotenv from "dotenv";
 import express, { Application, Request, Response } from "express";
 import userRoutes from "./routes/userRouter";
+import authRoutes from "./routes/authRouter";
+import loginRoutes from "./routes/loginRouter";
+
 const app: Application = express();
-const PORT: number = Number(process.env.PORT) || 3000;
 dotenv.config();
+const PORT: number = Number(process.env.PORT) || 3000;
 app.use(express.json());
 
-// 라우터 등록
-app.use("/users", userRoutes);
+// 회원가입, 토큰 재발급
+app.use("/signup", authRoutes);
 
-app.get("/", (req: Request, res: Response) => {
-  res.send("Hello toto");
-});
+// 로그인, 로그아웃
+app.use("/login", loginRoutes);
+
+// user 정보 조회
+app.use("/user", userRoutes);
 
 app.listen(PORT, function () {
   console.log(`App is listening on port ${PORT} !`);
