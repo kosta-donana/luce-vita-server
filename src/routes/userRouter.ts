@@ -3,13 +3,13 @@ import { userService } from '../services/userService';
 
 const router = Router();
 
-// 사용자 ID로 사용자와 여권 정보 조회
-router.get('/:id', async (req, res) => {
+// 사용자 정보와 여권 정보 같이 조회하는 함수
+router.get('/:user_id', async (req, res) => {
 
-    const userId = req.params.id;
+    const user_id = req.params.user_id;
 
     try {
-        const userInfo = await userService.getUserWithPassportById(userId);
+        const userInfo = await userService.getUserWithPassportById(user_id);
 
         res.status(200).json({ success: true, data: userInfo });
         
