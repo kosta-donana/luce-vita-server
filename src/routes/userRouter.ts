@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { userService } from "../services/userService";
+import { handleError } from "../utils/errorHandle";
 
 const router = Router();
 
@@ -12,19 +13,17 @@ router.get("/:user_id", async (req, res) => {
 
     res.status(200).json({ success: true, data: userInfo });
   } catch (error) {
-    // error가 Error 인스턴스인지 확인
-    if (error instanceof Error) {
-      res.status(404).json({
-        success: false,
-        error: error.message,
-      });
-    } else {
-      // Error 인스턴스가 아닌 경우
-      res.status(500).json({
-        success: false,
-        error: String(error),
-      });
-    }
+    handleError(res, error);
+  }
+});
+
+router.post("/:user_id/deactivate", async (req, res) => {
+  try {
+    const user_id = req.params.user_id;
+    const deletedUser = await userService.deleteUser(user_id);
+    res.status(200).json({ success: true, data: deletedUser });
+  } catch (error) {
+    handleError(res, error);
   }
 });
 

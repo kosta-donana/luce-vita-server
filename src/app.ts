@@ -1,8 +1,8 @@
 import dotenv from "dotenv";
-import express, { Application, Request, Response } from "express";
-import userRoutes from "./routes/userRouter";
+import express, { Application } from "express";
 import authRoutes from "./routes/authRouter";
 import loginRoutes from "./routes/loginRouter";
+import userRoutes from "./routes/userRouter";
 
 const app: Application = express();
 dotenv.config();
@@ -15,7 +15,7 @@ app.use("/signup", authRoutes);
 // 로그인, 로그아웃
 app.use("/login", loginRoutes);
 
-// user 정보 조회
+// user 라우터
 app.use("/user", userRoutes);
 
 app.listen(PORT, function () {

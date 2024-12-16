@@ -9,6 +9,16 @@ class UserService {
     }
     return userWithPassport;
   }
+
+  // 회원 탈퇴
+  async deleteUser(user_id: string) {
+    const deletedUser = await userModel.deleteUserById(user_id);
+    console.log(deletedUser);
+    if (!deletedUser || deletedUser.length === 0) {
+      throw new Error("User not found");
+    }
+    return deletedUser;
+  }
 }
 
 const userService = new UserService();

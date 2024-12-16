@@ -10,7 +10,7 @@ class UserModel {
       return [];
     }
 
-    return data ? data.map(row => row.user_email) : [];
+    return data ? data.map((row) => row.user_email) : [];
   }
 
   // 사용자 ID로 사용자와 여권 정보 조회
@@ -27,6 +27,21 @@ class UserModel {
       )
       .eq("user_id", user_id);
 
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    return data;
+  }
+
+  // 회원 탈퇴
+  async deleteUserById(user_id: string) {
+    console.log(user_id);
+    const { data, error } = await supabase
+      .from("user_info")
+      .update({ is_deleted: true })
+      .eq("user_id", user_id)
+      .select("*");
     if (error) {
       throw new Error(error.message);
     }
