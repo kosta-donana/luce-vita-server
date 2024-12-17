@@ -1,4 +1,5 @@
 import supabase from "../supabaseClients";
+import { Passport } from "../types/passport.type";
 
 class UserModel {
   // 사용자 이메일 조회
@@ -66,6 +67,46 @@ class UserModel {
     } else {
       // 중복 아니면
       return null;
+    }
+  }
+
+  // passport 테이블에 user_id 존재하는지 찾고, 없으면 insert, 있으면 update 수행
+  async upsertPassportById(user_id: string, passportData: Passport) {
+    // passport 테이블에 userid 있는지 확인
+    const { data: existingPassport, error: fetchError } = await supabase
+      .from("passport")
+      .select("*")
+      .eq("user_id", user_id)
+      .select("*"); // 없으면 [] 빈 리스트 넘어옴
+
+    if (fetchError) {
+      throw new Error("Error fetching passport data: " + fetchError.message);
+    }
+
+    if (existingPassport && existingPassport.length > 0) {
+      // passport 정보가 존재하면 업데이트
+      const { data, error: updateError } = await supabase
+        .from("passport")
+        .update(passportData)
+        .eq("user_id", user_id)
+        .select("*");
+
+      if (updateError) {
+        throw new Error("Error Updating Passport: " + updateError.message);
+      }
+
+      return data; // 업데이트된 passport 정보 반환
+    } else {
+      // passport 정보가 없으면 인서트
+      const { data, error: insertError } = await supabase
+        .from("passport")
+        .insert([{ user_id: user_id, ...passportData }])
+        .select("*");
+
+      if (insertError) {
+        throw new Error("Error Inserting Passport: " + insertError.message);
+      }
+      return data; // 새로 인서트된 passport 정보 반환
     }
   }
 }
