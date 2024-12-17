@@ -40,4 +40,18 @@ router.get("/validate/:nickname", async (req, res) => {
   }
 });
 
+// 여권 정보 생성 및 수정
+router.post("/:user_id/passport", async (req, res) => {
+  const user_id = req.params.user_id;
+  const passportData = req.body; // 여권 정보
+
+  try {
+    const upsertedPassport = await userService.upsertPassport(user_id, passportData);
+
+    res.status(200).json({ success: true, data: upsertedPassport });
+  } catch (error) {
+    handleError(res, error);
+  }
+});
+
 export default router;
