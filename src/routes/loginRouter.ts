@@ -1,4 +1,3 @@
-import supabase from "../supabaseClients";
 import { Router, Request, Response } from "express";
 import { handleError } from "../utils/errorHandle";
 import { setAuthCookies } from "../utils/cookie";
@@ -61,6 +60,9 @@ router.get("/auth/callback", async (req: Request, res: Response) => {
 
 // 로그아웃
 router.post("/logout", async (res: Response) => {
+  const logout = await logoutService.logout();
+
+  // 쿠키 삭제
   res.clearCookie("access_token", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",

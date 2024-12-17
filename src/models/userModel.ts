@@ -10,7 +10,7 @@ class UserModel {
       return [];
     }
 
-    return data ? data.map((row) => row.user_email) : [];
+    return data ? data.map(row => row.user_email) : [];
   }
 
   // 사용자 ID로 사용자와 여권 정보 조회
