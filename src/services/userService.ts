@@ -1,4 +1,5 @@
 import { userModel } from "../models/userModel";
+import { Passport } from "../types/passport.type";
 
 class UserService {
   async getUserWithPassportById(user_id: string) {
@@ -28,6 +29,15 @@ class UserService {
       available: !existingNickname,
       message: existingNickname ? "Nickname is already taken." : "Nickname is available.",
     };
+  }
+
+  async upsertPassport(user_id: string, passportData: Passport) {
+    const upsertedPassport = await userModel.upsertPassportById(user_id, passportData);
+
+    if (!upsertedPassport || upsertedPassport.length === 0) {
+      throw new Error("User not found or error updating passport");
+    }
+    return upsertedPassport;
   }
 }
 
