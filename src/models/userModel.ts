@@ -48,6 +48,26 @@ class UserModel {
 
     return data;
   }
+
+  async findNickname(nickname: string) {
+    const { data: existingNickname, error } = await supabase
+      .from("user_info")
+      .select("nickname")
+      .eq("nickname", nickname)
+      .select("*"); // 중복 아니면 []
+
+    if (error) {
+      throw new Error(error.message);
+    }
+
+    if (existingNickname && existingNickname.length > 0) {
+      // 중복이면
+      return existingNickname;
+    } else {
+      // 중복 아니면
+      return null;
+    }
+  }
 }
 
 const userModel = new UserModel();

@@ -19,6 +19,16 @@ class UserService {
     }
     return deletedUser;
   }
+
+  async isNicknameAvailable(nickname: string) {
+    const existingNickname = await userModel.findNickname(nickname);
+    // 이미 존재하면 truly 값, 없으면 falsy 값 넘어옴
+    // 뒤집어서 닉네임이 존재하면 false, 없으면 true 반환해줌
+    return {
+      available: !existingNickname,
+      message: existingNickname ? "Nickname is already taken." : "Nickname is available.",
+    };
+  }
 }
 
 const userService = new UserService();
