@@ -1,12 +1,13 @@
+import cookieParser from "cookie-parser";
 import cors from "cors";
 import dotenv from "dotenv";
 import express, { Application } from "express";
 import authRoutes from "./routes/authRouter";
-import loginRoutes from "./routes/loginRouter";
-import userRoutes from "./routes/userRouter";
-import postRoutes from "./routes/postRouter";
-import cookieParser from "cookie-parser";
 import commentRoutes from "./routes/commentRouter";
+import loginRoutes from "./routes/loginRouter";
+import postRoutes from "./routes/postRouter";
+import travelRoutes from "./routes/travelRouter";
+import userRoutes from "./routes/userRouter";
 
 const app: Application = express();
 dotenv.config();
@@ -23,6 +24,8 @@ app.use("/login", loginRoutes);
 
 // user 라우터
 app.use("/users", userRoutes);
+// travel 관련 라우터
+app.use("/travels", travelRoutes);
 
 // 게시글 라우터
 app.use("/post", postRoutes);
