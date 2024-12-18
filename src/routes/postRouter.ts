@@ -1,6 +1,6 @@
 import { Router, Request, Response } from "express";
 import { handleError } from "../utils/errorHandle";
-import { postService } from "../services/communityService";
+import { postService } from "../services/postService";
 
 const router = Router();
 

@@ -15,7 +15,7 @@ class VerifyUserService {
     console.log("Checking includes...");
     if (exist.includes(email)) {
       console.log("이미 등록된 유저입니다.");
-      return;
+      throw new Error("Registered User");
     }
 
     // 유저가 존재하지 않는 경우
