@@ -1,3 +1,4 @@
+import cors from "cors";
 import dotenv from "dotenv";
 import express, { Application } from "express";
 import authRoutes from "./routes/authRouter";
@@ -12,6 +13,7 @@ dotenv.config();
 const PORT: number = Number(process.env.PORT) || 3000;
 app.use(express.json());
 app.use(cookieParser());
+app.use(cors());
 
 // 회원가입, 토큰 재발급
 app.use("/signup", authRoutes);
@@ -20,7 +22,7 @@ app.use("/signup", authRoutes);
 app.use("/login", loginRoutes);
 
 // user 라우터
-app.use("/user", userRoutes);
+app.use("/users", userRoutes);
 
 // 게시글 라우터
 app.use("/post", postRoutes);

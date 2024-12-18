@@ -21,7 +21,34 @@ router.post("/:user_id/deactivate", async (req, res) => {
   try {
     const user_id = req.params.user_id;
     const deletedUser = await userService.deleteUser(user_id);
+
     res.status(200).json({ success: true, data: deletedUser });
+  } catch (error) {
+    handleError(res, error);
+  }
+});
+
+router.get("/validate/:nickname", async (req, res) => {
+  const nickname = req.params.nickname;
+
+  try {
+    const { available, message } = await userService.isNicknameAvailable(nickname);
+
+    res.json({ success: true, available, message });
+  } catch (error) {
+    handleError(res, error);
+  }
+});
+
+// 여권 정보 생성 및 수정
+router.post("/:user_id/passport", async (req, res) => {
+  const user_id = req.params.user_id;
+  const passportData = req.body; // 여권 정보
+
+  try {
+    const upsertedPassport = await userService.upsertPassport(user_id, passportData);
+
+    res.status(200).json({ success: true, data: upsertedPassport });
   } catch (error) {
     handleError(res, error);
   }
