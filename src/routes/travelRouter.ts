@@ -87,4 +87,29 @@ router.get("/:travel_id/schedules/:schedule_date", async (req, res) => {
     }
 });
 
+// 여행 상세 일정 추가/수정/삭제
+router.post("/:travel_id/schedules", async (req, res) => {
+    try {
+        const travel_id = req.params.travel_id;
+        let scheduleData = req.body;
+        scheduleData = { ...scheduleData, travel_id };
+        const changedTravelSchedule = await travelService.handleTravelSchedule(scheduleData);
+
+        res.status(200).json({ success: true, data: changedTravelSchedule });
+    } catch (error) {
+        handleError(res, error);
+    }
+});
+
+// 특정 날짜 상세 일정 전부 삭제
+router.delete("/:travel_id/schedules/:schedule_date", async (req, res) => {
+    try {
+        const { travel_id, schedule_date } = req.params;
+        const deletedSchedules = await travelService.deleteSchedule(travel_id, schedule_date);
+        res.status(200).json({ success: true, data: deletedSchedules });
+    } catch (error) {
+        handleError(res, error);
+    }
+});
+
 export default router;
