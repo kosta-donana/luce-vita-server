@@ -37,7 +37,6 @@ class UserModel {
 
   // 회원 탈퇴
   async deleteUserById(user_id: string) {
-    console.log(user_id);
     const { data, error } = await supabase
       .from("user_info")
       .update({ is_deleted: true })
@@ -113,3 +112,4 @@ class UserModel {
 
 const userModel = new UserModel();
 export { userModel };
+

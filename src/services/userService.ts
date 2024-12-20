@@ -14,7 +14,7 @@ class UserService {
   // 회원 탈퇴
   async deleteUser(user_id: string) {
     const deletedUser = await userModel.deleteUserById(user_id);
-    console.log(deletedUser);
+
     if (!deletedUser || deletedUser.length === 0) {
       throw new Error("User not found");
     }
@@ -43,3 +43,4 @@ class UserService {
 
 const userService = new UserService();
 export { userService };
+
