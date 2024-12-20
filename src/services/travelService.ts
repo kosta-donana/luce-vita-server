@@ -88,7 +88,7 @@ class TravelService {
 
         return selectedAllScheduleByDate;
     }
-    // 여행 상세 일정 추가/수정/삭제
+
     async handleTravelSchedule(scheduleData: ReqSchedule) {
         const changedInfo = await travelModel.modifyTravelSchedule(scheduleData); // 배열로 던져줌
 
@@ -102,6 +102,17 @@ class TravelService {
         }
 
         return changedInfo;
+    }
+
+    // 특정 날짜 상세 일정 전부 삭제
+    async deleteSchedule(travel_id: string, schedule_date: string) {
+        const deletedSchedules = await travelModel.deleteScheduleByScheduleDate(travel_id, schedule_date);
+
+        if (!deletedSchedules || deletedSchedules.length === 0) {
+            throw new Error("No schedules found for the specified date");
+        }
+
+        return deletedSchedules;
     }
 
 }

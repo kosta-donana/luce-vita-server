@@ -101,4 +101,15 @@ router.post("/:travel_id/schedules", async (req, res) => {
     }
 });
 
+// 특정정 날짜 상세 일정 전부 삭제
+router.delete("/:travel_id/schedules/:schedule_date", async (req, res) => {
+    try {
+        const { travel_id, schedule_date } = req.params;
+        const deletedSchedules = await travelService.deleteSchedule(travel_id, schedule_date);
+        res.status(200).json({ success: true, data: deletedSchedules });
+    } catch (error) {
+        handleError(res, error);
+    }
+});
+
 export default router;

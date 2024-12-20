@@ -202,6 +202,22 @@ class TravelModel {
         }
     }
 
+    // 특정 날짜 상세 일정 전부 삭제
+    async deleteScheduleByScheduleDate(travel_id: string, schedule_date: string) {
+        const { data, error } = await supabase
+            .from("schedule")
+            .delete()
+            .eq("travel_id", travel_id)
+            .eq("schedule_date", schedule_date)
+            .select("*");
+
+        if (error) {
+            throw new Error(error.message);
+        }
+
+        return data;
+    }
+
 }
 
 const travelModel = new TravelModel();
