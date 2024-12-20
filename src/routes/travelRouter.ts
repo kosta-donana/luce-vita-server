@@ -26,4 +26,29 @@ router.post("/", async (req, res) => {
     }
 });
 
+// 여행 업데이트
+router.put("/:travel_id", async (req, res) => {
+    try {
+        const travel_id = req.params.travel_id;
+        const travelData = req.body;
+        const updatedTravel = await travelService.updateTravel(travel_id, travelData);
+
+        res.status(200).json({ success: true, data: updatedTravel });
+    } catch (error) {
+        handleError(res, error);
+    }
+});
+
+// 여행 삭제
+router.delete("/:travel_id", async (req, res) => {
+    try {
+        const travel_id = req.params.travel_id;
+        const deletedTravel = await travelService.deleteTravel(travel_id);
+
+        res.status(200).json({ success: true, data: deletedTravel });
+    } catch (error) {
+        handleError(res, error);
+    }
+});
+
 export default router;
