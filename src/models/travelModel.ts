@@ -64,6 +64,21 @@ class TravelModel {
         return data;
     }
 
+    // 여행에서 날짜별로 두 번째 일정까지 가져옴
+    async getTravelTopScheduleByDate(travel_id: string) {
+        const { data, error } = await supabase.rpc("get_grouped_schedule", {
+            travel_id_param: travel_id,
+            limit_rows: 2,
+        });
+
+        if (error) {
+            throw new Error(error.message);
+        }
+
+        return data;
+    }
+
+
 }
 
 const travelModel = new TravelModel();

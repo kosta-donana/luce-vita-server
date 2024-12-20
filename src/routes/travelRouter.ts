@@ -63,5 +63,17 @@ router.get("/:travel_id/budgets", async (req, res) => {
     }
 });
 
+// 여행 날짜별로 두 번째 일정까지 가져오기
+router.get("/:travel_id/top-schedules", async (req, res) => {
+    try {
+        const travel_id = req.params.travel_id;
+        const fetchedTravelSchedule = await travelService.fetchTravelTopScheduleByDate(travel_id);
+
+        res.status(200).json({ success: true, data: fetchedTravelSchedule });
+    } catch (error) {
+        handleError(res, error);
+    }
+});
+
 
 export default router;

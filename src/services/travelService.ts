@@ -66,6 +66,18 @@ class TravelService {
         return travelBudgetList;
     }
 
+    // 여행에서 날짜별로 상위 스케쥴만 가져옴
+    async fetchTravelTopScheduleByDate(travel_id: string) {
+        const selectedTravelByDate = await travelModel.getTravelTopScheduleByDate(travel_id);
+
+        if (!selectedTravelByDate || selectedTravelByDate.length === 0) {
+            throw new Error("Travel not found or no schedules available");
+        }
+
+        return selectedTravelByDate;
+    }
+
+
 
 }
 
