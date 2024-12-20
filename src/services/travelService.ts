@@ -24,7 +24,6 @@ class TravelService {
 
     // 여행 생성
     async createTravel(travelData: Travel) {
-        console.log(travelData);
         const insertedTravel = await travelModel.insertTravel(travelData);
 
         if (!insertedTravel || insertedTravel.length === 0) {
@@ -34,8 +33,31 @@ class TravelService {
         return insertedTravel;
     }
 
+    // 여행 업데이트
+    async updateTravel(travel_id: string, travelData: Travel) {
+        const updatedTravel = await travelModel.updateTravelByTravelId(travel_id, travelData);
+
+        if (!updatedTravel || updatedTravel.length === 0) {
+            throw new Error("Travel not found");
+        }
+
+        return updatedTravel;
+    }
+
+    // 여행 삭제
+    async deleteTravel(travel_id: string) {
+        const deletedTravel = await travelModel.deleteTravelByTravelId(travel_id);
+
+        if (!deletedTravel || deletedTravel.length === 0) {
+            throw new Error("Travel not found or could not be deleted.");
+        }
+
+        return deletedTravel;
+    }
+
 
 }
 
 const travelService = new TravelService();
 export { travelService };
+

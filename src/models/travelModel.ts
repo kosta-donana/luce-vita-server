@@ -28,7 +28,30 @@ class TravelModel {
         return data;
     }
 
+    // 여행 업데이트
+    async updateTravelByTravelId(travel_id: string, travelData: Travel) {
+        const { data, error } = await supabase.from("travel").update(travelData).eq("travel_id", travel_id).select("*");
+
+        if (error) {
+            throw new Error(error.message);
+        }
+
+        return data;
+    }
+
+    // 여행 삭제
+    async deleteTravelByTravelId(travel_id: string) {
+        const { data, error } = await supabase.from("travel").delete().eq("travel_id", travel_id).select("*");
+
+        if (error) {
+            throw new Error(error.message);
+        }
+
+        return data;
+    }
+
 }
 
 const travelModel = new TravelModel();
 export { travelModel };
+
