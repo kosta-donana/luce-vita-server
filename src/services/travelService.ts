@@ -55,6 +55,38 @@ class TravelService {
         return deletedTravel;
     }
 
+    async fetchTravelBudgetListByTravelId(travel_id: string) {
+        // 여행의 일정 날짜와 예산 가져옴
+        const travelBudgetList = await travelModel.getTravelBudgetListByTravelId(travel_id);
+
+        if (!travelBudgetList || travelBudgetList.length === 0) {
+            throw new Error("Travel not found or no budgets available.");
+        }
+
+        return travelBudgetList;
+    }
+
+    // 여행에서 날짜별로 상위 스케쥴만 가져옴
+    async fetchTravelTopScheduleByDate(travel_id: string) {
+        const selectedTravelByDate = await travelModel.getTravelTopScheduleByDate(travel_id);
+
+        if (!selectedTravelByDate || selectedTravelByDate.length === 0) {
+            throw new Error("Travel not found or no schedules available");
+        }
+
+        return selectedTravelByDate;
+    }
+
+    // 여행 해당 날짜 모든 일정 가져오기
+    async fetchAllScheduleByDate(searchData: { travel_id: string, schedule_date: string }) {
+        const selectedAllScheduleByDate = await travelModel.getAllScheduleByDate(searchData);
+
+        if (!selectedAllScheduleByDate || selectedAllScheduleByDate.length === 0) {
+            throw new Error("No schedules found for the specified date");
+        }
+
+        return selectedAllScheduleByDate;
+    }
 
 }
 

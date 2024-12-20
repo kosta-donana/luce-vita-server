@@ -51,4 +51,40 @@ router.delete("/:travel_id", async (req, res) => {
     }
 });
 
+// 여행 예산 리스트 가져오기 ( 날짜별 예산 )
+router.get("/:travel_id/budgets", async (req, res) => {
+    try {
+        const travel_id = req.params.travel_id;
+        const travelBudgetList = await travelService.fetchTravelBudgetListByTravelId(travel_id);
+
+        res.status(200).json({ success: true, data: travelBudgetList });
+    } catch (error) {
+        handleError(res, error);
+    }
+});
+
+// 여행 날짜별로 두 번째 일정까지 가져오기
+router.get("/:travel_id/top-schedules", async (req, res) => {
+    try {
+        const travel_id = req.params.travel_id;
+        const fetchedTravelSchedule = await travelService.fetchTravelTopScheduleByDate(travel_id);
+
+        res.status(200).json({ success: true, data: fetchedTravelSchedule });
+    } catch (error) {
+        handleError(res, error);
+    }
+});
+
+// 여행 해당 날짜 모든 일정 가져오기
+router.get("/:travel_id/schedules/:schedule_date", async (req, res) => {
+    try {
+        const searchData = req.params;
+        const fetchedAllScheduleByDate = await travelService.fetchAllScheduleByDate(searchData);
+
+        res.status(200).json({ success: true, data: fetchedAllScheduleByDate });
+    } catch (error) {
+        handleError(res, error);
+    }
+});
+
 export default router;
