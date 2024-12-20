@@ -55,6 +55,17 @@ class TravelService {
         return deletedTravel;
     }
 
+    async fetchTravelBudgetListByTravelId(travel_id: string) {
+        // 여행의 일정 날짜와 예산 가져옴
+        const travelBudgetList = await travelModel.getTravelBudgetListByTravelId(travel_id);
+
+        if (!travelBudgetList || travelBudgetList.length === 0) {
+            throw new Error("Travel not found or no budgets available.");
+        }
+
+        return travelBudgetList;
+    }
+
 
 }
 

@@ -50,6 +50,20 @@ class TravelModel {
         return data;
     }
 
+    async getTravelBudgetListByTravelId(travel_id: string) {
+        const { data, error } = await supabase
+            .from("schedule")
+            .select("schedule_date, budget")
+            .eq("travel_id", travel_id)
+            .order("schedule_date");
+
+        if (error) {
+            throw new Error(error.message);
+        }
+
+        return data;
+    }
+
 }
 
 const travelModel = new TravelModel();

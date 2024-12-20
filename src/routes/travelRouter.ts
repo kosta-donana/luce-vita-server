@@ -51,4 +51,17 @@ router.delete("/:travel_id", async (req, res) => {
     }
 });
 
+// 여행 예산 리스트 가져오기 ( 날짜별 예산 )
+router.get("/:travel_id/budgets", async (req, res) => {
+    try {
+        const travel_id = req.params.travel_id;
+        const travelBudgetList = await travelService.fetchTravelBudgetListByTravelId(travel_id);
+
+        res.status(200).json({ success: true, data: travelBudgetList });
+    } catch (error) {
+        handleError(res, error);
+    }
+});
+
+
 export default router;
