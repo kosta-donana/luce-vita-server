@@ -218,6 +218,23 @@ class TravelModel {
         return data;
     }
 
+    // 여행 상세 일정 is_done 업데이트 (TRUE/FALSE)
+    async updateIsDone(schedule_id: number, is_done: boolean) {
+        const { data, error } = await supabase
+            .from("schedule")
+            .update({
+                is_done: is_done,
+            })
+            .eq("schedule_id", schedule_id)
+            .select("*");
+
+        if (error) {
+            throw new Error(error.message);
+        }
+
+        return data;
+    }
+
 }
 
 const travelModel = new TravelModel();

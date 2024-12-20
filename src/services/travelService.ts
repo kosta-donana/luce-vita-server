@@ -115,6 +115,17 @@ class TravelService {
         return deletedSchedules;
     }
 
+    // 여행 상세 일정 is_done 업데이트 (TRUE/FALSE)
+    async updateIsDoneStatusByScheduleId(schedule_id: number, is_done: boolean) {
+        const updatedData = await travelModel.updateIsDone(schedule_id, is_done);
+
+        if (!updatedData || updatedData.length === 0) {
+            throw new Error("Schedule not found or invalid 'is_done' status");
+        }
+
+        return updatedData;
+    }
+
 }
 
 const travelService = new TravelService();
