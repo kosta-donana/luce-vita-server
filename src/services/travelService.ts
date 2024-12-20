@@ -1,4 +1,5 @@
 import { travelModel } from "../models/travelModel";
+import { ReqSchedule } from "../types/schedule.type";
 import { ResTravel, Travel } from "../types/travel.type";
 
 class TravelService {
@@ -86,6 +87,21 @@ class TravelService {
         }
 
         return selectedAllScheduleByDate;
+    }
+    // 여행 상세 일정 추가/수정/삭제
+    async handleTravelSchedule(scheduleData: ReqSchedule) {
+        const changedInfo = await travelModel.modifyTravelSchedule(scheduleData); // 배열로 던져줌
+
+        const totalChanges =
+            (changedInfo.insertedSchedule?.length || 0) +
+            (changedInfo.updatedSchedule?.length || 0) +
+            (changedInfo.deletedSchedule?.length || 0);
+
+        if (totalChanges === 0) {
+            throw new Error("Creating, Updating, Deleting schedule error");
+        }
+
+        return changedInfo;
     }
 
 }
