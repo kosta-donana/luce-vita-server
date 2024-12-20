@@ -112,4 +112,20 @@ router.delete("/:travel_id/schedules/:schedule_date", async (req, res) => {
     }
 });
 
+// 여행 상세 일정 is_done 업데이트 (TRUE/FALSE)
+router.patch("/schedules/:schedule_id/:is_done", async (req, res) => {
+    try {
+        // schedule_id를 number로 변환
+        const schedule_id = parseInt(req.params.schedule_id, 10);
+
+        // is_done을 boolean으로 변환
+        const is_done = req.params.is_done === "true";
+
+        const updatedScheduleIsDone = await travelService.updateIsDoneStatusByScheduleId(schedule_id, is_done);
+        res.status(200).json({ success: true, data: updatedScheduleIsDone });
+    } catch (error) {
+        handleError(res, error);
+    }
+});
+
 export default router;

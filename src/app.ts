@@ -8,6 +8,7 @@ import loginRoutes from "./routes/loginRouter";
 import postRoutes from "./routes/postRouter";
 import travelRoutes from "./routes/travelRouter";
 import userRoutes from "./routes/userRouter";
+import { specs, swaggerUi } from "./swagger/swagger";
 
 const app: Application = express();
 dotenv.config();
@@ -26,10 +27,15 @@ app.use("/login", loginRoutes);
 app.use("/users", userRoutes);
 // travel 관련 라우터
 app.use("/travels", travelRoutes);
+// country 관련 라우터
+app.use("/countries", travelRoutes);
 
 // 게시글 라우터
 app.use("/post", postRoutes);
 app.use("/comment", commentRoutes);
+
+// swagger API 
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 app.listen(PORT, function () {
   console.log(`App is listening on port ${PORT} !`);
