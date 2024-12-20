@@ -78,6 +78,25 @@ class TravelModel {
         return data;
     }
 
+    // 여행 해당 날짜 모든 일정 가져오기
+    async getAllScheduleByDate(searchData: { travel_id: string, schedule_date: string }) {
+        const { travel_id, schedule_date } = searchData;
+        console.log(travel_id);
+        console.log(schedule_date);
+        const { data, error } = await supabase
+            .from("schedule")
+            .select("*")
+            .eq("travel_id", travel_id)
+            .eq("schedule_date", schedule_date)
+            .order("schedule_no"); // start_date를 기준으로 내림차순 정렬
+
+        console.log("Data", data);
+        if (error) {
+            throw new Error(error.message);
+        }
+
+        return data;
+    }
 
 }
 

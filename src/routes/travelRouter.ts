@@ -75,5 +75,16 @@ router.get("/:travel_id/top-schedules", async (req, res) => {
     }
 });
 
+// 여행 해당 날짜 모든 일정 가져오기
+router.get("/:travel_id/schedules/:schedule_date", async (req, res) => {
+    try {
+        const searchData = req.params;
+        const fetchedAllScheduleByDate = await travelService.fetchAllScheduleByDate(searchData);
+
+        res.status(200).json({ success: true, data: fetchedAllScheduleByDate });
+    } catch (error) {
+        handleError(res, error);
+    }
+});
 
 export default router;
