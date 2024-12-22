@@ -3,7 +3,7 @@ import supabase from "../supabaseClients";
 class PostService {
   // 게시물 조회
   async viewPost(category: string): Promise<any> {
-    const { data, error } = await supabase.from("post").select("*").eq("category", category);
+    const { data, error } = await supabase.from("post").select("*").eq("category", category).select("*");
 
     console.log(data);
 
