@@ -2,6 +2,12 @@ import { userModel } from "../models/userModel";
 import supabase from "../supabaseClients";
 
 class VerifyUserService {
+  private otpService: OtpService;
+
+  constructor(otpService: OtpService) {
+    this.otpService = otpService;
+  }
+
   // DB에 이미 등록된 회원인지 검증
   async existingUser(email: string, password: string) {
     console.log(email);
@@ -51,8 +57,7 @@ class VerifyUserService {
     }
 
     // OTP 번호 요청
-    const otpService = new OtpService();
-    otpService.sendOtp(email, password);
+    await this.otpService.sendOtp(email, password);
   }
 }
 
@@ -84,7 +89,7 @@ class OtpService {
 
     if (error) {
       console.error("otp 인증 실패", error.message);
-      throw new Error(error.message);
+      throw new Error("Registered User, Verification Failed");
     }
 
     console.log(data);
@@ -131,7 +136,7 @@ class TokenService {
   }
 }
 
-const verifyService = new VerifyUserService();
 const otpService = new OtpService();
+const verifyService = new VerifyUserService(otpService);
 const tokenService = new TokenService();
 export { verifyService, otpService, tokenService };

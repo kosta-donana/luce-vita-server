@@ -24,7 +24,7 @@ app.use("/login", loginRoutes);
 // user 라우터
 app.use("/users", userRoutes);
 
-// 게시글 라우터
+// 커뮤니티 라우터
 app.use("/post", postRoutes);
 app.use("/comment", commentRoutes);
 
