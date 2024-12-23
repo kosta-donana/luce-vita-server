@@ -1,14 +1,33 @@
 import supabase from "../supabaseClients";
 
 class PostService {
-  // 게시물 조회
-  async viewPost(category: string): Promise<any> {
+  // 게시물 리스트 조회
+  async viewPostList(category: string): Promise<any> {
     const { data, error } = await supabase.from("post").select("*").eq("category", category).select("*");
 
     console.log(data);
 
     if (error) {
       console.error("Fail to load post by category", error.message);
+      throw new Error(error.message);
+    }
+
+    return data;
+  }
+
+  // 게시물  조회
+  async viewPost(category: string, post_id: number): Promise<any> {
+    const { data, error } = await supabase
+      .from("post")
+      .select("*")
+      .eq("category", category)
+      .eq("post_id", post_id)
+      .select("*");
+
+    console.log(data);
+
+    if (error) {
+      console.error("Fail to load post by category or post id", error.message);
       throw new Error(error.message);
     }
 

@@ -11,7 +11,22 @@ router.get("/:category", loginRequired.checkLogin.bind(loginRequired), async (re
   const { category } = req.params;
 
   try {
-    const post = await postService.viewPost(category);
+    const post = await postService.viewPostList(category);
+
+    console.log(post);
+    res.status(200).json({ success: true, data: post });
+  } catch (error) {
+    handleError(res, error);
+  }
+});
+
+// 상세 게시글 조회
+router.get("/:category/:post_id", loginRequired.checkLogin.bind(loginRequired), async (req: Request, res: Response) => {
+  const { category } = req.params;
+  const post_id = parseInt(req.params.post_id, 10);
+
+  try {
+    const post = await postService.viewPost(category, post_id);
 
     console.log(post);
     res.status(200).json({ success: true, data: post });
