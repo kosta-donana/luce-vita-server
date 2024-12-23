@@ -30,7 +30,7 @@ app.use("/travels", travelRoutes);
 // country 관련 라우터
 app.use("/countries", travelRoutes);
 
-// 게시글 라우터
+// 커뮤니티 라우터
 app.use("/post", postRoutes);
 app.use("/comment", commentRoutes);
 

@@ -1,38 +1,32 @@
 import supabase from "../supabaseClients";
 
-class LoadUserService {
-  // 로그인된 유저 정보를 가져오는 함수
-  async loadUserInfo(): Promise<{ user: any; error?: string }> {
-    const { data, error } = await supabase.auth.getUser();
+class PostService {
+  // 게시물 조회
+  async viewPost(category: string): Promise<any> {
+    const { data, error } = await supabase.from("post").select("*").eq("category", category).select("*");
 
-    if (error || !data.user) {
-      console.error("Fail to load user login info", error?.message);
-      return { user: null, error: "User not authenticated" };
+    console.log(data);
+
+    if (error) {
+      console.error("Fail to load post by category", error.message);
+      throw new Error(error.message);
     }
 
-    return { user: data.user };
-  }
-}
-
-class PostService {
-  private userInfo: LoadUserService;
-
-  constructor(userInfo: LoadUserService) {
-    this.userInfo = userInfo; // 의존성 주입
+    return data;
   }
 
   // 게시글 생성
   async createPost(
+    user: any,
     title: string,
     content: string,
     category: string,
     attached_file: string,
     tags: string[]
   ): Promise<{ success: boolean; data?: any; error?: string }> {
-    const { user, error } = await this.userInfo.loadUserInfo();
-
-    if (error || !user || !user.id) {
-      return { success: false, error: "User not authenticated or invalid user data" };
+    if (!user) {
+      console.error("User authentication failed");
+      return { success: false, error: "User not authenticated" };
     }
 
     const newPost = {
@@ -46,7 +40,7 @@ class PostService {
 
     console.log("Inserting post:", newPost);
 
-    const { data, error: insertError } = await supabase.from("post").insert([newPost]);
+    const { data, error: insertError } = await supabase.from("post").insert([newPost]).select("*");
 
     if (insertError) {
       console.error("Database insert error:", insertError.message);
@@ -56,7 +50,9 @@ class PostService {
     return { success: true, data: data };
   }
 
+  // 게시글 업데이트
   async updatePost(
+    user: any,
     post_id: number,
     title: string,
     content: string,
@@ -64,12 +60,10 @@ class PostService {
     attached_file: string,
     tags: string[]
   ): Promise<{ success: boolean; data?: any; error?: string }> {
-    const { user, error } = await this.userInfo.loadUserInfo();
-
-    if (error || !user) {
+    if (!user) {
+      console.error("User authentication failed");
       return { success: false, error: "User not authenticated" };
     }
-    console.log("current user:", user);
 
     const editPost = {
       title,
@@ -79,26 +73,26 @@ class PostService {
       tags,
     };
 
-    // 게시글 db에 업데이트
     const { data, error: updateError } = await supabase
       .from("post")
       .update([editPost])
       .eq("post_id", post_id)
-      .eq("author", user.id);
+      .eq("author", user.id)
+      .select("*");
 
     if (updateError) {
-      console.error("Fail to insert post into database", updateError.message);
+      console.error("Fail to update post in database:", updateError.message);
       return { success: false, error: updateError.message };
     }
-    console.log("Post updated successfully", data);
+
+    console.log("Post updated successfully:", data);
     return { success: true, data: data };
   }
 
-  //   게시글 삭제
-  async deletePost(post_id: number): Promise<{ success: boolean; data?: any; error?: string }> {
-    const { user, error } = await this.userInfo.loadUserInfo();
-
-    if (error || !user) {
+  // 게시글 삭제
+  async deletePost(user: any, post_id: number): Promise<{ success: boolean; data?: any; error?: string }> {
+    if (!user) {
+      console.error("User authentication failed");
       return { success: false, error: "User not authenticated" };
     }
 
@@ -106,16 +100,17 @@ class PostService {
       .from("post")
       .delete()
       .eq("post_id", post_id)
-      .eq("author", user.id);
+      .eq("author", user.id)
+      .select("*");
 
     if (deleteError) {
-      return { success: false, error: "Fail to delete the post" };
+      console.error("Fail to delete post:", deleteError.message);
+      return { success: false, error: deleteError.message };
     }
 
     return { success: true, data: data };
   }
 }
 
-const userInfo = new LoadUserService();
-const postService = new PostService(userInfo);
+const postService = new PostService();
 export { postService };

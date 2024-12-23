@@ -31,7 +31,7 @@ router.post("/social", async (req: Request, res: Response) => {
 
   try {
     const social = await loginService.socialLogin(provider);
-    res.status(200).json({ success: true, message: "success to redirect social-login" });
+    res.status(200).json({ success: true, message: "success to redirect: " + social });
   } catch (error) {
     handleError(res, error);
   }

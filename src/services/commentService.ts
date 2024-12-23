@@ -1,5 +1,4 @@
 import supabase from "../supabaseClients";
-import { postData, commentData } from "../models/postModel";
 
 class LoadUserService {
   // 로그인된 유저 정보를 가져오는 함수
@@ -36,7 +35,7 @@ class CommentService {
       post_id: post_id,
     };
 
-    const { data, error: insertError } = await supabase.from("comment").insert([newComment]);
+    const { data, error: insertError } = await supabase.from("comment").insert([newComment]).select("*");
 
     if (insertError) {
       console.error("Fail to insert Comment into Database", insertError.message);
@@ -60,7 +59,8 @@ class CommentService {
       .update([updatedComment])
       .eq("comment_id", comment_id)
       .eq("author", user.id)
-      .eq("post_id", post_id); // 추가 검증
+      .eq("post_id", post_id)
+      .select("*"); // 추가 검증
 
     if (updateError) {
       console.error("Fail to update Comment", updateError.message);
@@ -87,7 +87,8 @@ class CommentService {
       .delete()
       .eq("comment_id", comment_id)
       .eq("author", user.id)
-      .eq("post_id", post_id);
+      .eq("post_id", post_id)
+      .select("*");
 
     if (deleteError) {
       console.error("Fail to delete Comment", deleteError.message);
