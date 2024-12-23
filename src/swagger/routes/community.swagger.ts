@@ -127,8 +127,8 @@
  *                 "example": "게시글 내용"
  *               },
  *               "category": {
- *                 "type": "string",
- *                 "example": "notice"
+ *                 "type": "enum",
+ *                 "example": "mate"
  *               },
  *               "attached_file": {
  *                 "type": "string",

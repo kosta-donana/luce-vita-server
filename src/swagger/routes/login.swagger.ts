@@ -2,7 +2,7 @@
  * @swagger
  * tags:
  *   - name: Login
- *     description: Login 관련 API
+ *     description: 로그인 관련 API
  *   - name: Social Login
  *     description: 소셜 로그인 관련 API
  */

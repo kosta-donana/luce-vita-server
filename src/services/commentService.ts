@@ -1,32 +1,11 @@
 import supabase from "../supabaseClients";
 
-class LoadUserService {
-  // 로그인된 유저 정보를 가져오는 함수
-  async loadUserInfo(): Promise<{ user: any; error?: string }> {
-    const { data, error } = await supabase.auth.getUser();
-
-    if (error || !data.user) {
-      console.error("Fail to load user login info", error?.message);
-      return { user: null, error: "User not authenticated" };
-    }
-
-    return { user: data.user };
-  }
-}
-
 class CommentService {
-  private userInfo: LoadUserService;
-
-  constructor(userInfo: LoadUserService) {
-    this.userInfo = userInfo; // 의존성 주입
-  }
-
   // 댓글 추가
-  async createComment(post_id: number, content: string) {
-    const { user, error } = await this.userInfo.loadUserInfo();
-
-    if (error || !user || !user.id) {
-      return { success: false, error: "User not authenticated or invalid user data" };
+  async createComment(post_id: number, content: string, user: any) {
+    if (!user) {
+      console.error("User authentication failed");
+      return { success: false, error: "User not authenticated" };
     }
 
     const newComment = {
@@ -45,11 +24,10 @@ class CommentService {
   }
 
   // 댓글 수정
-  async editComment(comment_id: number, content: string, post_id: number) {
-    const { user, error } = await this.userInfo.loadUserInfo();
-
-    if (error || !user || !user.id) {
-      return { success: false, error: "User not authenticated or invalid user data" };
+  async editComment(comment_id: number, content: string, post_id: number, user: any) {
+    if (!user) {
+      console.error("User authentication failed");
+      return { success: false, error: "User not authenticated" };
     }
 
     const updatedComment = { content: content };
@@ -71,11 +49,10 @@ class CommentService {
   }
 
   // 댓글 삭제
-  async deleteComment(comment_id: number, post_id: number) {
-    const { user, error } = await this.userInfo.loadUserInfo();
-
-    if (error || !user || !user.id) {
-      return { success: false, error: "User not authenticated or invalid user data" };
+  async deleteComment(comment_id: number, post_id: number, user: any) {
+    if (!user) {
+      console.error("User authentication failed");
+      return { success: false, error: "User not authenticated" };
     }
 
     if (typeof post_id !== "number") {
@@ -99,6 +76,5 @@ class CommentService {
   }
 }
 
-const userInfo = new LoadUserService();
-const commentService = new CommentService(userInfo);
+const commentService = new CommentService();
 export { commentService };

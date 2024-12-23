@@ -3,6 +3,7 @@ import supabase from "../supabaseClients";
 
 class LoginRequired {
   async checkLogin(req: Request, res: Response, next: NextFunction): Promise<void> {
+
     try {
       const { data, error } = await supabase.auth.getUser();
 
