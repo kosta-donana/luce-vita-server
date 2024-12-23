@@ -3,7 +3,7 @@ import { verifyService, otpService, tokenService } from "../services/authService
 import { handleError } from "../utils/errorHandle";
 import { setAuthCookies } from "../utils/cookie";
 
-const router = Router();
+const router: Router = Router();
 
 // 회원가입 라우터
 router.post("/", async (req: Request, res: Response) => {

@@ -89,7 +89,7 @@ class OtpService {
 
     if (error) {
       console.error("otp 인증 실패", error.message);
-      throw new Error("Registered User, Verification Failed");
+      throw new Error("Verification Failed");
     }
 
     console.log(data);
