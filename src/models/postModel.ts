@@ -1,8 +1,8 @@
 import supabase from "../supabaseClients";
 
 class PostData {
-  async fetchPostDataByUserid(author: string): Promise<any> {
-    const { data, error } = await supabase.from("post").select("*").eq("author", author);
+  async fetchPostDataByUserid(author_id: string): Promise<any> {
+    const { data, error } = await supabase.from("post").select("*").eq("author_id", author_id);
 
     if (error) {
       console.error("Fail to load post data by user_id", error);
@@ -25,8 +25,8 @@ class PostData {
 }
 
 class CommentData {
-  async fetchCommentDataByUserid(author: string): Promise<any> {
-    const { data, error } = await supabase.from("comment").select("*").eq("author", author);
+  async fetchCommentDataByUserid(author_id: string): Promise<any> {
+    const { data, error } = await supabase.from("comment").select("*").eq("author_id", author_id);
 
     if (error) {
       console.error("Fail to load comment data by user_id", error);

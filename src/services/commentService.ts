@@ -10,7 +10,7 @@ class CommentService {
 
     const newComment = {
       content: content,
-      author: user.id,
+      author_id: user.id,
       post_id: post_id,
     };
 
@@ -36,7 +36,7 @@ class CommentService {
       .from("comment")
       .update([updatedComment])
       .eq("comment_id", comment_id)
-      .eq("author", user.id)
+      .eq("author_id", user.id)
       .eq("post_id", post_id)
       .select("*"); // 추가 검증
 
@@ -63,7 +63,7 @@ class CommentService {
       .from("comment")
       .delete()
       .eq("comment_id", comment_id)
-      .eq("author", user.id)
+      .eq("author_id", user.id)
       .eq("post_id", post_id)
       .select("*");
 
