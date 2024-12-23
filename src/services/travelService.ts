@@ -79,8 +79,8 @@ class TravelService {
     }
 
     // 여행 해당 날짜 모든 일정 가져오기
-    async fetchAllScheduleByDate(searchData: { travel_id: string, schedule_date: string }) {
-        const selectedAllScheduleByDate = await travelModel.getAllScheduleByDate(searchData);
+    async fetchAllScheduleByDate(travel_id: string, schedule_date: string) {
+        const selectedAllScheduleByDate = await travelModel.getAllScheduleByDate(travel_id, schedule_date);
 
         if (!selectedAllScheduleByDate || selectedAllScheduleByDate.length === 0) {
             throw new Error("No schedules found for the specified date");
