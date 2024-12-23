@@ -1,11 +1,12 @@
 import { Router } from "express";
+import { loginRequired } from "../middleware/loginRequired";
 import { userService } from "../services/userService";
 import { handleError } from "../utils/errorHandle";
 
 const router: Router = Router();
 
 // 사용자 정보와 여권 정보 같이 조회하는 함수
-router.get("/:user_id", async (req, res) => {
+router.get("/:user_id", loginRequired.checkLogin.bind(loginRequired), async (req, res) => {
   const user_id = req.params.user_id;
 
   try {
@@ -17,7 +18,7 @@ router.get("/:user_id", async (req, res) => {
   }
 });
 
-router.post("/:user_id/deactivate", async (req, res) => {
+router.post("/:user_id/deactivate", loginRequired.checkLogin.bind(loginRequired), async (req, res) => {
   try {
     const user_id = req.params.user_id;
     const deletedUser = await userService.deleteUser(user_id);
@@ -41,7 +42,7 @@ router.get("/validate/:nickname", async (req, res) => {
 });
 
 // 여권 정보 생성 및 수정
-router.post("/:user_id/passport", async (req, res) => {
+router.post("/:user_id/passport", loginRequired.checkLogin.bind(loginRequired), async (req, res) => {
   const user_id = req.params.user_id;
   const passportData = req.body; // 여권 정보
 
