@@ -2,7 +2,7 @@
  * @swagger
  * tags:
  *   - name: Signin
- *     description: Signin 관련 API
+ *     description: 회원가입 관련 API
  */
 
 /**

@@ -226,3 +226,86 @@
  *               example: KRW
  *               description: The currency of the country.
  */
+
+/**
+ * @swagger
+ *     components:
+ *       schemas:
+ *         Post:
+ *           type: object
+ *           properties:
+ *             post_id:
+ *               type: integer
+ *               example: 1
+ *               description: Post Number.
+ *             title:
+ *               type: string
+ *               example: "게시글 제목"
+ *               description: Post title
+ *             content:
+ *               type: string
+ *               example: "이 포스트는 테스트용 입니다."
+ *               description: Post Content
+ *             category:
+ *               type: enum
+ *               example: "mate"
+ *               description: Categories for classifying posts - notice, mate, tips
+ *             author:
+ *               type: string
+ *               format: uuid
+ *               example: "6b172f54-5ae0-4ec0-af64-7783df38a16d"
+ *             attached_file:
+ *               type: string
+ *               nullable: true
+ *               example: "travel01.png"
+ *             tags:
+ *               type: array
+ *               items:
+ *                    type: string
+ *               example: ["tag1", "tag2", "tag3"]
+ *             created_at:
+ *               type: string
+ *               format: date
+ *               description: Post creation date
+ *               example: 2024-12-13
+ *             updated_at:
+ *               type: string
+ *               format: date
+ *               description: Post last update date
+ *               example: 2024-12-13
+ */
+
+/**
+ * @swagger
+ *     components:
+ *       schemas:
+ *         Comment:
+ *           type: object
+ *           properties:
+ *             comment_id:
+ *               type: integer
+ *               example: 1
+ *               description: Comment identify Number.
+ *             content:
+ *               type: string
+ *               example: "이 댓글은 테스트용 입니다."
+ *               description: Comment Content
+ *             author:
+ *               type: string
+ *               format: uuid
+ *               example: "6b172f54-5ae0-4ec0-af64-7783df38a16d"
+ *             post_id:
+ *               type: number
+ *               example: 1
+ *               description: The post number to which the comment belongs
+ *             created_at:
+ *               type: string
+ *               format: date
+ *               description: Post creation date
+ *               example: 2024-12-13
+ *             updated_at:
+ *               type: string
+ *               format: date
+ *               description: Post last update date
+ *               example: 2024-12-13
+ */

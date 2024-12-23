@@ -4,10 +4,14 @@ import { Request, Response, NextFunction } from "express";
 class LoginRequired {
   async checkLogin(req: Request, res: Response, next: NextFunction): Promise<void> {
     const { data, error } = await supabase.auth.getUser();
+    console.log("로그인 미들웨어", data);
+    console.log("로그인 미들웨어", error);
 
     // 로그인 여부 확인
     if (!data || !data.user || !data.user.id) {
-      throw new Error("user not found");
+      // throw new Error("user not found");
+      res.status(401).json({ success: false, error: "User not found" });
+      return;
     }
 
     try {
@@ -19,7 +23,9 @@ class LoginRequired {
         .single();
 
       if (roleError || !roleData) {
-        throw new Error("role not found");
+        // throw new Error("role not found");
+        res.status(403).json({ success: false, error: "Role not found" });
+        return;
       }
 
       // 요청 객체에 사용자 정보와 역할 추가
