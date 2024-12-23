@@ -52,7 +52,7 @@ class PostService {
       title: title || "", // null 방지
       content: content || "",
       category: category || "",
-      author: user.id,
+      author_id: user.id,
       attached_file: attached_file || null,
       tags: tags || [],
     };
@@ -96,7 +96,7 @@ class PostService {
       .from("post")
       .update([editPost])
       .eq("post_id", post_id)
-      .eq("author", user.id)
+      .eq("author_id", user.id)
       .select("*");
 
     if (updateError) {
@@ -119,7 +119,7 @@ class PostService {
       .from("post")
       .delete()
       .eq("post_id", post_id)
-      .eq("author", user.id)
+      .eq("author_id", user.id)
       .select("*");
 
     if (deleteError) {
