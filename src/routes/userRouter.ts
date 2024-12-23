@@ -2,7 +2,7 @@ import { Router } from "express";
 import { userService } from "../services/userService";
 import { handleError } from "../utils/errorHandle";
 
-const router = Router();
+const router: Router = Router();
 
 // 사용자 정보와 여권 정보 같이 조회하는 함수
 router.get("/:user_id", async (req, res) => {

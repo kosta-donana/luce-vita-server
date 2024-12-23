@@ -3,7 +3,7 @@ import { handleError } from "../utils/errorHandle";
 import { setAuthCookies } from "../utils/cookie";
 import { loginService, logoutService } from "../services/loginService";
 
-const router = Router();
+const router: Router = Router();
 
 // 기본 이메일 로그인 라우터
 router.post("/", async (req: Request, res: Response) => {
