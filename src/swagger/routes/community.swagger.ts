@@ -1,14 +1,17 @@
 /**
  * @swagger
  * tags:
- *   name: Community
- *   description: Community 관련 API
+ *   - name: Post
+ *     description: Post 관련 API
+ *   - name: Comment
+ *     description: Comment 관련 API
  */
 
 /**
  * @swagger
- * "/post/view/{category}": {
+ * "/post/{category}": {
       "get": {
+        "tags": ["Post"],
         "summary": "게시글 조회",
         "parameters": [
           {
@@ -50,8 +53,9 @@
 
 /**
  * @swagger
- * "/post/view/{category}/{post_id}": {
+ * "/post/{category}/{post_id}": {
       "get": {
+        "tags": ["Post"],
         "summary": "상세 게시글 조회",
         "parameters": [
           {
@@ -107,6 +111,7 @@
  *@swagger
  "/post/create": {
       "post": {
+        "tags": ["Post"],
         "summary": "게시글 생성",
         "requestBody": {
           "required": true,
@@ -172,6 +177,7 @@
  * @swagger
  * "/post/edit/{post_id}": {
       "put": {
+        "tags": ["Post"],
         "summary": "게시글 수정",
         "parameters": [
           {
@@ -233,6 +239,7 @@
  * @swagger
  * "/post/delete/{post_id}": {
       "delete": {
+        "tags": ["Post"],
         "summary": "게시글 삭제",
         "parameters": [
           {
@@ -271,6 +278,7 @@
  * @swagger
  * "/comment/create": {
       "post": {
+        "tags": ["Comment"],
         "summary": "댓글 생성",
         "requestBody": {
           "required": true,
@@ -320,6 +328,7 @@
  * @swagger
  * "/comment/edit/{comment_id}": {
       "put": {
+        "tags": ["Comment"],
         "summary": "댓글 수정",
         "parameters": [
           {
@@ -376,6 +385,7 @@
  * @swagger
  * "/comment/delete/{comment_id}": {
       "delete": {
+        "tags": ["Comment"],
         "summary": "댓글 삭제",
         "parameters": [
           {
