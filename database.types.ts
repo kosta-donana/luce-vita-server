@@ -14,136 +14,214 @@ export interface Database {
     Tables: {
       country: {
         Row: {
-          countryNo: number;
-          countryCode: string;
-          countryName: string;
+          country_no: number;
+          country_code: string;
+          country_name: string;
           currency: string;
         };
       };
 
-      users: {
+      user_info: {
         Row: {
-          userId: string;
-          userPw: string;
+          user_id: string;
+          user_email: string;
           nickname: string;
-          userProfile: string;
-          role: Enumerator;
-          passNum: number;
-          createdAt: Date;
+          user_profile: string;
+          role: string;
+          is_deleted: boolean;
+          created_at: Date;
+          updated_at: Date;
         };
         Insert: {
-          userId: string;
-          userPw: string;
+          user_id: string;
+          user_email: string;
           nickname: string | null;
-          userProfile: string | null;
-          role: Enumerator;
-          passNum: number | null;
-          createdAt: Date;
+          user_profile: string | null;
+          role: string;
+          is_deleted: boolean;
+          created_at: Date;
+          updated_at: Date;
         };
         Update: {
-          userId?: never;
-          userPw: string;
+          user_id?: never;
+          user_email?: never;
           nickname: string | null;
-          userProfile: string | null;
+          user_profile: string | null;
           role?: never;
-          passNum: number | null;
-          createdAt?: never;
+          created_at?: never;
+          updated_at: Date;
         };
       };
 
       passport: {
         Row: {
-          passNum: string;
-          passName: string;
-          countryNo: number;
-          issueDate: Date;
-          expireDate: Date;
+          passport_id: string;
+          user_id: string;
+          pass_num: string;
+          pass_name: string;
+          country_no: number;
+          issue_date: Date;
+          expire_date: Date;
         };
         Insert: {
-          passNum: string | null;
-          passName: string | null;
-          countryNo: number | null;
-          issueDate: Date | null;
-          expireDate: Date | null;
+          passport_id: string;
+          user_id: string;
+          pass_num: string | null;
+          pass_name: string | null;
+          country_no: number | null;
+          issue_date: Date | null;
+          expire_date: Date | null;
         };
         Update: {
-          passNum: string | null;
-          passName: string | null;
-          countryNo: number | null;
-          issueDate: Date | null;
-          expireDate: Date | null;
+          passport_id?: never;
+          user_id: string;
+          pass_num: string | null;
+          pass_name: string | null;
+          country_no: number | null;
+          issue_date: Date | null;
+          expire_date: Date | null;
         };
       };
 
       schedule: {
         Row: {
-          scheduleId: number;
-          tripId: number;
-          scheduleDate: Date;
+          schedule_id: number;
+          travel_id: number;
+          schedule_date: Date;
           budget: number;
-          scheduleContext: string;
-          scheduleNo: number;
+          schedule_content: string;
+          schedule_no: number;
+          is_done: boolean;
         };
         Insert: {
-          scheduleId?: never;
-          tripId?: never;
-          scheduleDate: Date;
+          schedule_id?: never;
+          travel_id?: never;
+          schedule_date: Date;
           budget: number | null;
-          scheduleContext: string | null;
-          scheduleNo: number;
+          schedule_content: string | null;
+          schedule_no: number;
+          is_done: boolean;
         };
         Update: {
-          scheduleId?: never;
-          tripId?: never;
-          scheduleDate: Date;
+          schedule_id?: never;
+          travel_id?: never;
+          schedule_date: Date;
           budget: number | null;
-          scheduleContext: string | null;
-          scheduleNo: number;
+          schedule_content: string | null;
+          schedule_no: number;
+          is_done: boolean;
         };
       };
 
-      trip: {
+      travel: {
         Row: {
-          tripId: number;
-          userId: string;
-          countryNo: number;
-          localName: string;
-          startDate: Date;
-          endDate: Date;
+          travel_id: number;
+          user_id: string;
+          travel_title: string;
+          local_name: string;
+          country_no: number;
+          start_date: Date;
+          end_date: Date;
           address: string;
-          title: string;
-          tripImg: string;
-          budgetTotal: number;
-          tag: string;
+          travel_img: string;
+          budget_total: number;
+          tags: string[];
           memo: string;
         };
         insert: {
-          tripId?: never;
-          userId: string;
-          countryNo: number;
-          localName: string | null;
-          startDate: Date | null;
-          endDate: Date | null;
+          travel_id?: never;
+          user_id: string;
+          travel_title: string | null;
+          local_name: string | null;
+          country_no: number;
+          start_date: Date | null;
+          end_date: Date | null;
           address: string | null;
-          title: string | null;
-          tripImg: string | null;
-          budgetTotal: number | null;
-          tag: string | null;
+          travel_img: string | null;
+          budget_total: number | null;
+          tags: string[] | null;
           memo: string | null;
         };
         update: {
-          tripId?: never;
-          userId?: never;
-          countryNo: number;
-          localName: string | null;
-          startDate: Date | null;
-          endDate: Date | null;
+          travel_id?: never;
+          user_id?: never;
+          travel_title: string | null;
+          local_name: string | null;
+          country_no: number;
+          start_date: Date | null;
+          end_date: Date | null;
           address: string | null;
-          title: string | null;
-          tripImg: string | null;
-          budgetTotal: number | null;
-          tag: string | null;
+          travel_img: string | null;
+          budget_total: number | null;
+          tags: string[] | null;
           memo: string | null;
+        };
+      };
+      post: {
+        Row: {
+          post_id: number;
+          title: string;
+          content: string;
+          category: Enumerator;
+          author_id: string;
+          attached_file: string | null;
+          tags: string[] | null;
+          created_at: Date;
+          updated_at: Date;
+          author: string;
+        };
+        Insert: {
+          post_id?: never;
+          title: string;
+          content: string;
+          category: Enumerator;
+          author_id: string;
+          attached_file: string | null;
+          tags: string[] | null;
+          created_at: Date;
+          updated_at: Date;
+          author: string;
+        };
+        Update: {
+          post_id?: never;
+          title: string;
+          content: string;
+          category: Enumerator;
+          author_id?: never;
+          attached_file: string | null;
+          tags: string[] | null;
+          created_at: Date;
+          updated_at: Date;
+          author?: never;
+        };
+      };
+      comment: {
+        Row: {
+          comment_id: number;
+          post_id: number;
+          author_id: string;
+          author: string;
+          content: string;
+          created_at: Date;
+          updated_at: Date;
+        };
+        Insert: {
+          comment_id?: never;
+          post_id: number;
+          author_id: string;
+          author: string;
+          content: string;
+          created_at: Date;
+          updated_at: Date;
+        };
+        Update: {
+          comment_id?: never;
+          post_id?: never;
+          author_id?: never;
+          author?: never;
+          content: string;
+          created_at: Date;
+          updated_at: Date;
         };
       };
     };
