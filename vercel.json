@@ -10,7 +10,7 @@
     {
       "src": "/[^.]+",
       "dest": "/app.ts",
-      "status": 200
+      "method": ["GET", "POST", "PUT", "DELETE"]
     }
   ],
   "rewrites": [{ "source": "/(.*)", "destination": "/app.ts" }]
