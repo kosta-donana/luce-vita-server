@@ -10,8 +10,8 @@ const swaggerOptions = {
             version: "1.0.0",
             description: "My API documentation",
         },
+        servers: [{ url: "http://localhost:4000" }],
     },
-    servers: ["http://localhost:4000"],
     apis: ["./src/swagger/routes/*.swagger.ts",
         "./src/swagger/components/*.ts"], // 주석을 포함한 파일 경로
 };
@@ -20,3 +20,4 @@ const specs = swaggerJSDoc(swaggerOptions);
 
 
 export { specs, swaggerUi };
+

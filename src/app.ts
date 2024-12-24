@@ -4,6 +4,7 @@ import dotenv from "dotenv";
 import express, { Application } from "express";
 import authRoutes from "./routes/authRouter";
 import commentRoutes from "./routes/commentRouter";
+import countryRoutes from "./routes/countryRouter";
 import loginRoutes from "./routes/loginRouter";
 import postRoutes from "./routes/postRouter";
 import travelRoutes from "./routes/travelRouter";
@@ -28,7 +29,7 @@ app.use("/api/users", userRoutes);
 // travel 관련 라우터
 app.use("/api/travels", travelRoutes);
 // country 관련 라우터
-app.use("/api/countries", travelRoutes);
+app.use("/api/countries", countryRoutes);
 
 // 커뮤니티 라우터
 app.use("/api/post", postRoutes);
@@ -37,5 +38,5 @@ app.use("/api/comment", commentRoutes);
 // swagger API
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
-// app.listen(PORT, function () {});
+app.listen(PORT, function () { });
 module.exports = app;
