@@ -250,14 +250,17 @@
  *               type: enum
  *               example: "mate"
  *               description: Categories for classifying posts - notice, mate, tips
- *             author:
+ *             author_id:
  *               type: string
  *               format: uuid
  *               example: "6b172f54-5ae0-4ec0-af64-7783df38a16d"
+ *             author:
+ *               type: string
+ *               example: donana
  *             attached_file:
  *               type: string
  *               nullable: true
- *               example: "travel01.png"
+ *               example: https://example.com/uploads/profile.png
  *             tags:
  *               type: array
  *               items:
@@ -290,10 +293,13 @@
  *               type: string
  *               example: "이 댓글은 테스트용 입니다."
  *               description: Comment Content
- *             author:
+ *             author_id:
  *               type: string
  *               format: uuid
  *               example: "6b172f54-5ae0-4ec0-af64-7783df38a16d"
+ *             author:
+ *               type: string
+ *               example: donana
  *             post_id:
  *               type: number
  *               example: 1
