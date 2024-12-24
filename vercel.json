@@ -8,9 +8,10 @@
   ],
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "/app.ts"
+      "src": "/[^.]+",
+      "dest": "/app.ts",
+      "status": 200
     }
   ],
-  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
+  "rewrites": [{ "source": "/(.*)", "destination": "/app.ts" }]
 }
