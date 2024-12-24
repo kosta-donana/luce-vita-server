@@ -25,7 +25,8 @@
     "express": "^4.21.2",
     "jsonwebtoken": "^9.0.2",
     "swagger-jsdoc": "^6.2.8",
-    "swagger-ui-express": "^5.0.1"
+    "swagger-ui-express": "^5.0.1",
+    "vercel": "^39.2.2"
   },
   "devDependencies": {
     "@types/cookie-parser": "^1.4.8",
