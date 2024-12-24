@@ -1,20 +1,17 @@
-import { Router, Request, Response } from "express";
-import { handleError } from "../utils/errorHandle";
-import { setAuthCookies } from "../utils/cookie";
+import { Request, Response, Router } from "express";
 import { loginService, logoutService } from "../services/loginService";
+import { setAuthCookies } from "../utils/cookie";
+import { handleError } from "../utils/errorHandle";
 
 const router: Router = Router();
 
 // 기본 이메일 로그인 라우터
 router.post("/", async (req: Request, res: Response) => {
   const { email, password } = req.body;
-  console.log(email, password);
 
   try {
     const login = await loginService.emailLogin(email, password);
     const tokens = login.session;
-
-    console.log("success to login", login);
 
     setAuthCookies(res, tokens);
 
@@ -27,7 +24,6 @@ router.post("/", async (req: Request, res: Response) => {
 // 소셜 로그인 페이지 이동
 router.post("/social", async (req: Request, res: Response) => {
   const { provider } = req.body;
-  console.log(provider);
 
   try {
     const social = await loginService.socialLogin(provider);

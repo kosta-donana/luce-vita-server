@@ -5,7 +5,6 @@ class PostData {
     const { data, error } = await supabase.from("post").select("*").eq("author_id", author_id);
 
     if (error) {
-      console.error("Fail to load post data by user_id", error);
       return [];
     }
 
@@ -16,7 +15,6 @@ class PostData {
     const { data, error } = await supabase.from("post").select("*").eq("post_id", post_id);
 
     if (error) {
-      console.error("Fail to load post data by post_id", error);
       return [];
     }
 
@@ -29,7 +27,6 @@ class CommentData {
     const { data, error } = await supabase.from("comment").select("*").eq("author_id", author_id);
 
     if (error) {
-      console.error("Fail to load comment data by user_id", error);
       return [];
     }
 
@@ -40,4 +37,5 @@ class CommentData {
 const postData = new PostData();
 const commentData = new CommentData();
 
-export { postData, commentData };
+export { commentData, postData };
+

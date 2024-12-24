@@ -10,7 +10,6 @@ class TravelModel {
             .select("*, country(country_name, currency)")
             .eq("user_id", user_id) // user_id로 필터링
             .order("start_date", { ascending: false }); // start_date를 기준으로 내림차순 정렬
-        console.log("data", data);
         if (error) {
             throw new Error(error.message);
         }
@@ -181,7 +180,6 @@ class TravelModel {
                 .single();
 
             if (error) {
-                console.error(`Error updating schedule ${schedule.schedule_id}:`, error);
                 throw error;
             }
 
@@ -191,10 +189,8 @@ class TravelModel {
         try {
             // 모든 업데이트 작업 동시 실행
             const results = await Promise.all(updatePromises);
-            console.log("All updates completed:", results);
             return results;
         } catch (error) {
-            console.error("Update failed:", error);
         }
     }
 

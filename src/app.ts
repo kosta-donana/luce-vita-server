@@ -38,5 +38,4 @@ app.use("/api/comment", commentRoutes);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
 app.listen(PORT, function () {
-  console.log(`App is listening on port ${PORT} !`);
 });

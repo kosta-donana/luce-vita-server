@@ -1,8 +1,8 @@
-import { Router, Request, Response } from "express";
-import { handleError } from "../utils/errorHandle";
-import { postService } from "../services/postService";
+import { Request, Response, Router } from "express";
 import { admin } from "../middleware/adminMiddle";
 import { loginRequired } from "../middleware/loginRequired";
+import { postService } from "../services/postService";
+import { handleError } from "../utils/errorHandle";
 
 const router: Router = Router();
 
@@ -13,7 +13,6 @@ router.get("/:category", loginRequired.checkLogin.bind(loginRequired), async (re
   try {
     const post = await postService.viewPostList(category);
 
-    console.log(post);
     res.status(200).json({ success: true, data: post });
   } catch (error) {
     handleError(res, error);
@@ -28,7 +27,6 @@ router.get("/:category/:post_id", loginRequired.checkLogin.bind(loginRequired), 
   try {
     const post = await postService.viewPost(category, post_id);
 
-    console.log(post);
     res.status(200).json({ success: true, data: post });
   } catch (error) {
     handleError(res, error);
@@ -41,11 +39,9 @@ router.post(
   loginRequired.checkLogin.bind(loginRequired),
   admin.checkAdminRole.bind(admin),
   async (req: Request, res: Response): Promise<void> => {
-    console.log("request body:", req.body);
     const { title, content, category, attached_file, tags } = req.body;
     const file = attached_file || null;
     const user = (req as any).user;
-    console.log(user);
 
     if (!user) {
       res.status(401).json({ success: false, error: "User not authenticated" });
@@ -54,7 +50,6 @@ router.post(
     try {
       const createPost = await postService.createPost(user, title, content, category, file, tags);
 
-      console.log(createPost);
       res.status(200).json({ success: true, data: createPost });
     } catch (error) {
       handleError(res, error);
@@ -72,7 +67,6 @@ router.put(
     const { title, content, category, attached_file, tags } = req.body;
     const file = attached_file || null;
     const user = (req as any).user;
-    console.log(user);
 
     if (!user) {
       res.status(401).json({ success: false, error: "User not authenticated" });
@@ -81,7 +75,6 @@ router.put(
     try {
       const updatePost = await postService.updatePost(user, post_id, title, content, category, file, tags);
 
-      console.log(updatePost);
       res.status(200).json({ success: true, data: updatePost });
     } catch (error) {
       handleError(res, error);
@@ -105,7 +98,6 @@ router.delete(
     try {
       const deletePost = await postService.deletePost(user, post_id);
 
-      console.log(deletePost);
       res.status(200).json({ success: true, data: deletePost });
     } catch (error) {
       handleError(res, error);

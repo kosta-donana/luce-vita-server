@@ -6,7 +6,6 @@ import { handleError } from "../utils/errorHandle";
 const router: Router = Router();
 
 router.get("/:user_id", loginRequired.checkLogin.bind(loginRequired), async (req, res) => {
-  console.log("req", req);
   try {
     const user_id = req.params.user_id;
 

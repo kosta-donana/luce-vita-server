@@ -1,8 +1,8 @@
-import { Router, Request, Response } from "express";
-import { handleError } from "../utils/errorHandle";
-import { commentService } from "../services/commentService";
-import { loginRequired } from "../middleware/loginRequired";
+import { Request, Response, Router } from "express";
 import { admin } from "../middleware/adminMiddle";
+import { loginRequired } from "../middleware/loginRequired";
+import { commentService } from "../services/commentService";
+import { handleError } from "../utils/errorHandle";
 
 const router: Router = Router();
 
@@ -14,7 +14,6 @@ router.post(
   async (req: Request, res: Response): Promise<void> => {
     const { post_id, content } = req.body;
     const user = (req as any).user;
-    console.log(user);
 
     if (!user) {
       res.status(401).json({ success: false, error: "User not authenticated" });
@@ -23,7 +22,6 @@ router.post(
     try {
       const createComment = await commentService.createComment(post_id, content, user);
 
-      console.log(createComment);
       res.status(200).json({ success: true, data: createComment });
     } catch (error) {
       handleError(res, error);
@@ -40,7 +38,6 @@ router.put(
     const comment_id = parseInt(req.params.comment_id, 10);
     const { post_id, content } = req.body;
     const user = (req as any).user;
-    console.log(user);
 
     if (!user) {
       res.status(401).json({ success: false, error: "User not authenticated" });
@@ -49,7 +46,6 @@ router.put(
     try {
       const updateComment = await commentService.editComment(comment_id, content, post_id, user);
 
-      console.log(updateComment);
       res.status(200).json({ success: true, data: updateComment });
     } catch (error) {
       handleError(res, error);
@@ -66,7 +62,6 @@ router.delete(
     const comment_id = parseInt(req.params.comment_id, 10);
     const post_id = parseInt(req.body.post_id, 10);
     const user = (req as any).user;
-    console.log(user);
 
     if (!user) {
       res.status(401).json({ success: false, error: "User not authenticated" });
@@ -79,7 +74,6 @@ router.delete(
     try {
       const deleteComment = await commentService.deleteComment(comment_id, post_id, user);
 
-      console.log(deleteComment);
       res.status(200).json({ success: true, data: deleteComment });
     } catch (error) {
       handleError(res, error);

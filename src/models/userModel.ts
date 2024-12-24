@@ -7,7 +7,6 @@ class UserModel {
     const { data, error } = await supabase.from("user_info").select("user_email").eq("user_eamil", email);
 
     if (error) {
-      console.error("유저 데이터 DB 조회 실패", error);
       return [];
     }
 

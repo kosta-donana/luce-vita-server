@@ -14,141 +14,146 @@ export interface Database {
     Tables: {
       country: {
         Row: {
-          countryno: number;
-          countrycode: string;
-          countryname: string;
+          country_no: number;
+          country_code: string;
+          country_name: string;
           currency: string;
         };
       };
 
-      users: {
+      user_info: {
         Row: {
-          id: string;
-          email: string;
-          userpw: string;
+          user_id: string;
+          user_email: string;
           nickname: string;
-          userprofile: string;
-          role: Enumerator;
-          createdat: Date;
+          user_profile: string;
+          role: string;
+          is_deleted: boolean;
+          created_at: Date;
+          updated_at: Date;
         };
         Insert: {
-          id: string;
-          email: string;
-          userpw: string;
+          user_id: string;
+          user_email: string;
           nickname: string | null;
-          userprofile: string | null;
-          role: Enumerator;
-          createdat: Date;
+          user_profile: string | null;
+          role: string;
+          is_deleted: boolean;
+          created_at: Date;
+          updated_at: Date;
         };
         Update: {
-          id?: never;
-          email?: never; 
-          userPw: string;
+          user_id?: never;
+          user_email?: never;
           nickname: string | null;
-          userprofile: string | null;
+          user_profile: string | null;
           role?: never;
-          createdat?: never;
+          created_at?: never;
+          updated_at: Date;
         };
       };
 
       passport: {
         Row: {
-          passid: string;
-          userid: string;
-          passnum: string;
-          passname: string;
-          countryno: number;
-          issuedate: Date;
-          expiredate: Date;
+          passport_id: string;
+          user_id: string;
+          pass_num: string;
+          pass_name: string;
+          country_no: number;
+          issue_date: Date;
+          expire_date: Date;
         };
         Insert: {
-          passid: string;
-          userid: string;
-          passNum: string | null;
-          passName: string | null;
-          countryNo: number | null;
-          issueDate: Date | null;
-          expireDate: Date | null;
+          passport_id: string;
+          user_id: string;
+          pass_num: string | null;
+          pass_name: string | null;
+          country_no: number | null;
+          issue_date: Date | null;
+          expire_date: Date | null;
         };
         Update: {
-          passid?: never;
-          userid: string;
-          passnum: string | null;
-          passname: string | null;
-          countryno: number | null;
-          issuedate: Date | null;
-          expiredate: Date | null;
+          passport_id?: never;
+          user_id: string;
+          pass_num: string | null;
+          pass_name: string | null;
+          country_no: number | null;
+          issue_date: Date | null;
+          expire_date: Date | null;
         };
       };
 
       schedule: {
         Row: {
-          scheduleid: number;
-          tripid: number;
-          scheduledate: Date;
+          schedule_id: number;
+          travel_id: number;
+          schedule_date: Date;
           budget: number;
-          schedulecontext: string;
-          scheduleno: number;
+          schedule_content: string;
+          schedule_no: number;
+          is_done: boolean;
         };
         Insert: {
-          scheduleid?: never;
-          tripid?: never;
-          scheduledate: Date;
+          schedule_id?: never;
+          travel_id?: never;
+          schedule_date: Date;
           budget: number | null;
-          schedulecontext: string | null;
-          scheduleno: number;
+          schedule_content: string | null;
+          schedule_no: number;
+          is_done: boolean;
         };
         Update: {
-          scheduleid?: never;
-          tripid?: never;
-          scheduledate: Date;
+          schedule_id?: never;
+          travel_id?: never;
+          schedule_date: Date;
           budget: number | null;
-          schedulecontext: string | null;
-          scheduleno: number;
+          schedule_content: string | null;
+          schedule_no: number;
+          is_done: boolean;
         };
       };
 
-      trip: {
+      travel: {
         Row: {
-          tripid: number;
-          userid: string;
-          countryno: number;
-          localname: string;
-          startdate: Date;
-          enddate: Date;
+          travel_id: number;
+          user_id: string;
+          travel_title: string;
+          local_name: string;
+          country_no: number;
+          start_date: Date;
+          end_date: Date;
           address: string;
-          title: string;
-          tripimg: string;
-          budgettotal: number;
-          tag: string;
+          travel_img: string;
+          budget_total: number;
+          tags: string[];
           memo: string;
         };
         insert: {
-          tripid?: never;
-          userid: string;
-          countryno: number;
-          localname: string | null;
-          startdate: Date | null;
-          enddate: Date | null;
+          travel_id?: never;
+          user_id: string;
+          travel_title: string | null;
+          local_name: string | null;
+          country_no: number;
+          start_date: Date | null;
+          end_date: Date | null;
           address: string | null;
-          title: string | null;
-          tripimg: string | null;
-          budgettotal: number | null;
-          tag: string | null;
+          travel_img: string | null;
+          budget_total: number | null;
+          tags: string[] | null;
           memo: string | null;
         };
         update: {
-          tripid?: never;
-          userid?: never;
-          countryno: number;
-          localname: string | null;
-          startdate: Date | null;
-          enddate: Date | null;
+          travel_id?: never;
+          user_id?: never;
+          travel_title: string | null;
+          local_name: string | null;
+          country_no: number;
+          start_date: Date | null;
+          end_date: Date | null;
           address: string | null;
-          title: string | null;
-          tripimg: string | null;
-          budgettotal: number | null;
-          tag: string | null;
+          travel_img: string | null;
+          budget_total: number | null;
+          tags: string[] | null;
           memo: string | null;
         };
       };

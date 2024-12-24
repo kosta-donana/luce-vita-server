@@ -10,11 +10,9 @@ class LoginService {
     });
 
     if (error) {
-      console.error("Fail to login", error.message);
       throw new Error(error.message);
     }
 
-    console.log(data);
     return data;
   }
 
@@ -27,10 +25,8 @@ class LoginService {
       },
     });
 
-    console.log(data.url);
 
     if (error) {
-      console.error("Fail to social Login", error.message);
       throw new Error(error.message);
     }
 
@@ -55,7 +51,6 @@ class LogoutService {
     const { error } = await supabase.auth.signOut();
 
     if (error) {
-      console.log("fail to logout", error.message);
     }
   }
 }
@@ -63,3 +58,4 @@ class LogoutService {
 const loginService = new LoginService();
 const logoutService = new LogoutService();
 export { loginService, logoutService };
+

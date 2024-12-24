@@ -1,14 +1,13 @@
-import { Router, Request, Response } from "express";
-import { verifyService, otpService, tokenService } from "../services/authService";
-import { handleError } from "../utils/errorHandle";
+import { Request, Response, Router } from "express";
+import { otpService, tokenService, verifyService } from "../services/authService";
 import { setAuthCookies } from "../utils/cookie";
+import { handleError } from "../utils/errorHandle";
 
 const router: Router = Router();
 
 // 회원가입 라우터
 router.post("/", async (req: Request, res: Response) => {
   const { email, password } = req.body;
-  console.log(email, password);
 
   try {
     const newUser = await verifyService.existingUser(email, password);
@@ -24,7 +23,6 @@ router.post("/verify", async (req: Request, res: Response) => {
 
   try {
     const verified = await otpService.verifyOtp(email, token);
-    console.log("success to login", verified);
 
     const { access_token, refresh_token } = verified.session || {};
 
