@@ -35,7 +35,7 @@ router.get("/:category/:post_id", loginRequired.checkLogin.bind(loginRequired), 
 
 // 게시글 생성
 router.post(
-  "/create",
+  "/",
   loginRequired.checkLogin.bind(loginRequired),
   admin.checkAdminRole.bind(admin),
   async (req: Request, res: Response): Promise<void> => {
@@ -59,7 +59,7 @@ router.post(
 
 // 게시글 수정
 router.put(
-  "/edit/:post_id",
+  "/:post_id",
   loginRequired.checkLogin.bind(loginRequired),
   admin.checkAdminRole.bind(admin),
   async (req: Request, res: Response): Promise<void> => {
@@ -84,7 +84,7 @@ router.put(
 
 // 게시글 삭제
 router.delete(
-  "/delete/:post_id",
+  "/:post_id",
   loginRequired.checkLogin.bind(loginRequired),
   admin.checkAdminRole.bind(admin),
   async (req: Request, res: Response): Promise<void> => {

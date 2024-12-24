@@ -7,7 +7,7 @@
 
 /**
  * @swagger
- * "/signup/": {
+ * "/api/signup/": {
  *   "post": {
  *     "tags": ["Signin"],
  *     "summary": "회원가입",
@@ -66,7 +66,7 @@
 
 /**
  * @swagger
- * "/signup/verify": {
+ * "/api/signup/verify": {
  *   "post": {
  *     "tags": ["Signin"],
  *     "summary": "OTP 인증",

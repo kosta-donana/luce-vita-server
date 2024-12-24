@@ -10,22 +10,17 @@ class VerifyUserService {
 
   // DB에 이미 등록된 회원인지 검증
   async existingUser(email: string, password: string) {
-
-    // DB에서 입력된 이메일 존재 시 배열 반환, 없으면 빈 배열 반환
     const exist = await userModel.fetchUserEmail(email);
 
-    // 유저가 이미 등록된 경우
     if (exist.includes(email)) {
       throw new Error("Registered User");
     }
 
-    // 유저가 존재하지 않는 경우
-    await this.invalidUser(email, password); // 이 함수가 호출되어야 함
+    await this.invalidUser(email, password);
   }
 
   // 미등록 유저 처리
   async invalidUser(email: string, password: string) {
-    // auth.users 테이블 조회 > 존재하면 data 반환
     const { data, error } = await supabase.rpc("get_user_by_email", { user_email: email });
 
     if (error) {
@@ -33,7 +28,6 @@ class VerifyUserService {
     }
 
     if (data && data.length > 0) {
-      // auth.user에서 데이터 삭제
       const { error: deleteError } = await supabase.rpc("delete_user_by_email", { user_email: email });
 
       if (deleteError) {
@@ -112,9 +106,9 @@ class TokenService {
       };
     } catch (error) {
       if (error instanceof Error) {
-        throw new Error(error.message); // 에러를 호출자에게 전달
+        throw new Error(error.message);
       } else {
-        throw new Error("알 수 없는 오류가 발생했습니다."); // 알 수 없는 오류 처리
+        throw new Error("알 수 없는 오류가 발생했습니다.");
       }
     }
   }
@@ -124,4 +118,3 @@ const otpService = new OtpService();
 const verifyService = new VerifyUserService(otpService);
 const tokenService = new TokenService();
 export { otpService, tokenService, verifyService };
-

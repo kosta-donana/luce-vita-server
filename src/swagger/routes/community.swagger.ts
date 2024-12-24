@@ -9,7 +9,7 @@
 
 /**
  * @swagger
- * "/post/{category}": {
+ * "/api/post/{category}": {
  *   "get": {
  *     "tags": ["Post"],
  *     "summary": "게시글 조회",
@@ -53,7 +53,7 @@
 
 /**
  * @swagger
- * "/post/{category}/{post_id}": {
+ * "/api/post/{category}/{post_id}": {
  *   "get": {
  *     "tags": ["Post"],
  *     "summary": "상세 게시글 조회",
@@ -107,7 +107,7 @@
 
 /**
  * @swagger
- * "/post/create": {
+ * "/api/post/": {
  *   "post": {
  *     "tags": ["Post"],
  *     "summary": "게시글 생성",
@@ -173,7 +173,7 @@
 
 /**
  * @swagger
- * "/post/edit/{post_id}": {
+ * "/api/post/{post_id}": {
  *   "put": {
  *     "tags": ["Post"],
  *     "summary": "게시글 수정",
@@ -235,7 +235,7 @@
 
 /**
  * @swagger
- * "/post/delete/{post_id}": {
+ * "/api/post/{post_id}": {
  *   "delete": {
  *     "tags": ["Post"],
  *     "summary": "게시글 삭제",
@@ -272,7 +272,7 @@
 
 /**
  * @swagger
- * "/comment/create": {
+ * "/api/comment/": {
  *   "post": {
  *     "tags": ["Comment"],
  *     "summary": "댓글 생성",
@@ -322,7 +322,7 @@
 
 /**
  * @swagger
- * "/comment/edit/{comment_id}": {
+ * "/api/comment/{comment_id}": {
  *   "put": {
  *     "tags": ["Comment"],
  *     "summary": "댓글 수정",
@@ -379,7 +379,7 @@
 
 /**
  * @swagger
- * "/comment/delete/{comment_id}": {
+ * "/api/comment/{comment_id}": {
  *   "delete": {
  *     "tags": ["Comment"],
  *     "summary": "댓글 삭제",

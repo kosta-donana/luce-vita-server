@@ -7,7 +7,7 @@
 
 /**
  * @swagger
- * /travels/{user_id}:
+ * /api/travels/{user_id}:
  *   get:
  *     tags: [Travel]
  *     summary: Retrieve travel list by user ID
@@ -100,7 +100,7 @@
 
 /**
  * @swagger
- * /travels/{travel_id}/budgets:
+ * /api/travels/{travel_id}/budgets:
  *   get:
  *     tags: [Travel]
  *     summary: Retrieve travel budget list by travel ID
@@ -154,7 +154,7 @@
 
 /**
  * @swagger
- * /travels:
+ * /api/travels:
  *   post:
  *     tags: [Travel]
  *     summary: Create a new travel
@@ -198,7 +198,7 @@
 
 /**
  * @swagger
- * /travels/{travel_id}:
+ * /api/travels/{travel_id}:
  *   put:
  *     tags: [Travel]
  *     summary: Update travel information
@@ -279,7 +279,7 @@
 
 /**
  * @swagger
- * /travels/{travel_id}:
+ * /api/travels/{travel_id}:
  *   delete:
  *     tags: [Travel]
  *     summary: Delete a travel by ID
@@ -325,7 +325,7 @@
 
 /**
  * @swagger
- * /travels/{travel_id}/top-schedules:
+ * /api/travels/{travel_id}/top-schedules:
  *   get:
  *     tags: [Travel]
  *     summary: Get the top schedules for a specific travel

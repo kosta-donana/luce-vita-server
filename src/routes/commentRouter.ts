@@ -6,9 +6,9 @@ import { handleError } from "../utils/errorHandle";
 
 const router: Router = Router();
 
-// 게시글 생성
+// 댓글 생성
 router.post(
-  "/create",
+  "/",
   loginRequired.checkLogin.bind(loginRequired),
   admin.checkAdminRole.bind(admin),
   async (req: Request, res: Response): Promise<void> => {
@@ -29,9 +29,9 @@ router.post(
   }
 );
 
-// 게시글 수정
+// 댓글 수정
 router.put(
-  "/edit/:comment_id",
+  "/:comment_id",
   loginRequired.checkLogin.bind(loginRequired),
   admin.checkAdminRole.bind(admin),
   async (req: Request, res: Response): Promise<void> => {
@@ -53,9 +53,9 @@ router.put(
   }
 );
 
-// 게시글 삭제
+// 댓글 삭제
 router.delete(
-  "/delete/:comment_id",
+  "/:comment_id",
   loginRequired.checkLogin.bind(loginRequired),
   admin.checkAdminRole.bind(admin),
   async (req: Request, res: Response): Promise<void> => {

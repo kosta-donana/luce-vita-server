@@ -1,13 +1,12 @@
-
-/**
-* @swagger
-* tags:
-*   name: Country
-*   description: Country 관련 API
-*/
 /**
  * @swagger
- * /countries:
+ * tags:
+ *   name: Country
+ *   description: Country 관련 API
+ */
+/**
+ * @swagger
+ * /api/countries:
  *   get:
  *     tags: [Country]
  *     summary: Retrieve a list of countries

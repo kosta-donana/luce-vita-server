@@ -35,7 +35,7 @@ class CommentService {
       .eq("comment_id", comment_id)
       .eq("author_id", user.id)
       .eq("post_id", post_id)
-      .select("*"); // 추가 검증
+      .select("*");
 
     if (updateError) {
       return { success: false, error: updateError.message };
@@ -72,4 +72,3 @@ class CommentService {
 
 const commentService = new CommentService();
 export { commentService };
-

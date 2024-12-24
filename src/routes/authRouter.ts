@@ -31,7 +31,6 @@ router.post("/verify", async (req: Request, res: Response) => {
     } else {
       res.status(400).json({ success: false, message: "invalid Tokens" });
     }
-    // data 반환
     res.status(200).json({ success: true, data: verified });
   } catch (error) {
     handleError(res, error);
@@ -49,7 +48,6 @@ router.post("/token", async (req: Request, res: Response) => {
   try {
     const tokens = await tokenService.reissuedToken(refreshToken);
 
-    // 쿠키 설정
     setAuthCookies(res, tokens);
 
     res.status(200).json({ success: true, data: tokens });

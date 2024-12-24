@@ -6,7 +6,7 @@
  */
 /**
  * @swagger
- * /users/{id}:
+ * /api/users/{id}:
  *   get:
  *     tags: [User]
  *     summary: Retrieve user and passport information by user ID
@@ -68,7 +68,7 @@
 
 /**
  * @swagger
- * /users/{id}/deactivate:
+ * /api/users/{id}/deactivate:
  *   post:
  *     tags: [User]
  *     summary: Deactivate user account
@@ -114,7 +114,7 @@
 
 /**
  * @swagger
- * /users/{id}/passport:
+ * /api/users/{id}/passport:
  *   post:
  *     tags: [User]
  *     summary: Create or update passport information
@@ -209,7 +209,7 @@
 
 /**
  * @swagger
- * /users/{id}/profile:
+ * /api/users/{id}/profile:
  *   put:
  *     tags: [User]
  *     summary: Update user profile
@@ -270,7 +270,7 @@
 
 /**
  * @swagger
- * /users/validate/{nickname}:
+ * /api/users/validate/{nickname}:
  *   get:
  *     tags: [User]
  *     summary: Check if the nickname is available

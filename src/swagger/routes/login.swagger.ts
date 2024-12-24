@@ -9,7 +9,7 @@
 
 /**
  * @swagger
- * "/login/": {
+ * "/api/login": {
  *   "post": {
  *     "tags": ["Login"],
  *     "summary": "로그인",
@@ -62,7 +62,7 @@
 
 /**
  * @swagger
- * "/signup/token": {
+ * "/api/signup/token": {
  *   "post": {
  *     "tags": ["Login"],
  *     "summary": "토큰 재발급",
@@ -92,7 +92,7 @@
 
 /**
  * @swagger
- * "/social": {
+ * "/api/social": {
  *   "post": {
  *     "tags": ["Social Login"],
  *     "summary": "소셜 로그인 페이지 이동",
@@ -137,7 +137,7 @@
 
 /**
  * @swagger
- * "/auth/callback": {
+ * "/api/auth/callback": {
  *   "get": {
  *     "tags": ["Social Login"],
  *     "summary": "소셜 로그인 후 세션 데이터 조회",
@@ -195,7 +195,7 @@
 
 /**
  * @swagger
- * "/login/logout": {
+ * "/api/logout": {
  *   "post": {
  *     "tags": ["Login"],
  *     "summary": "로그아웃",

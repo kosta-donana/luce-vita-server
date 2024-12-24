@@ -21,7 +21,7 @@ app.use(cors());
 app.use("/api/signup", authRoutes);
 
 // 로그인, 로그아웃
-app.use("/api/login", loginRoutes);
+app.use("/api", loginRoutes);
 
 // user 라우터
 app.use("/api/users", userRoutes);
@@ -34,8 +34,7 @@ app.use("/api/countries", travelRoutes);
 app.use("/api/post", postRoutes);
 app.use("/api/comment", commentRoutes);
 
-// swagger API 
+// swagger API
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
-app.listen(PORT, function () {
-});
+app.listen(PORT, function () {});

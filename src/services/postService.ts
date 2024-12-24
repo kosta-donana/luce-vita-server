@@ -21,7 +21,6 @@ class PostService {
       .eq("post_id", post_id)
       .select("*");
 
-
     if (error) {
       throw new Error(error.message);
     }
@@ -43,7 +42,7 @@ class PostService {
     }
 
     const newPost = {
-      title: title || "", // null 방지
+      title: title || "",
       content: content || "",
       category: category || "",
       author_id: user.id,
@@ -119,4 +118,3 @@ class PostService {
 
 const postService = new PostService();
 export { postService };
-

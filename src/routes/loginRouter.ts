@@ -6,7 +6,7 @@ import { handleError } from "../utils/errorHandle";
 const router: Router = Router();
 
 // 기본 이메일 로그인 라우터
-router.post("/", async (req: Request, res: Response) => {
+router.post("/login", async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
   try {
@@ -44,10 +44,8 @@ router.get("/auth/callback", async (req: Request, res: Response) => {
     });
   }
 
-  //   쿠키 설정
   setAuthCookies(res, { access_token, refresh_token });
 
-  //   쿠카 설정 후 클라이언트 재전송
   res.status(200).json({
     success: true,
     message: "success to set session",

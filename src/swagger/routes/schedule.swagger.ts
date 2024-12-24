@@ -5,10 +5,9 @@
  *   description: Schedule 관련 API
  */
 
-
 /**
  * @swagger
- * /travels/{travel_id}/schedules/{schedule_date}:
+ * /api/travels/{travel_id}/schedules/{schedule_date}:
  *   get:
  *     tags: [Schedule]
  *     summary: Retrieve all schedules for a specific date of a travel
@@ -76,7 +75,7 @@
  */
 /**
  * @swagger
- * /travels/schedules/{schedule_id}/{is_done}:
+ * /api/travels/schedules/{schedule_id}/{is_done}:
  *   patch:
  *     tags: [Schedule]
  *     summary: Update the "is_done" status of a specific schedule
@@ -126,10 +125,9 @@
  *                   example: "Schedule not found or invalid 'is_done' status"
  */
 
-
 /**
  * @swagger
- * /travels/{travel_id}/schedules:
+ * /api/travels/{travel_id}/schedules:
  *   post:
  *     tags: [Schedule]
  *     summary: Add/Update/Delete detailed schedules for a specific travel
@@ -229,7 +227,7 @@
 
 /**
  * @swagger
- * /travels/{travel_id}/schedules/{schedule_date}:
+ * /api/travels/{travel_id}/schedules/{schedule_date}:
  *   delete:
  *     tags: [Schedule]
  *     summary: Delete all schedules for a specific date of a travel

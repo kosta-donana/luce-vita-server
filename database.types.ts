@@ -157,6 +157,73 @@ export interface Database {
           memo: string | null;
         };
       };
+      post: {
+        Row: {
+          post_id: number;
+          title: string;
+          content: string;
+          category: Enumerator;
+          author_id: string;
+          attached_file: string | null;
+          tags: string[] | null;
+          created_at: Date;
+          updated_at: Date;
+          author: string;
+        };
+        Insert: {
+          post_id?: never;
+          title: string;
+          content: string;
+          category: Enumerator;
+          author_id: string;
+          attached_file: string | null;
+          tags: string[] | null;
+          created_at: Date;
+          updated_at: Date;
+          author: string;
+        };
+        Update: {
+          post_id?: never;
+          title: string;
+          content: string;
+          category: Enumerator;
+          author_id?: never;
+          attached_file: string | null;
+          tags: string[] | null;
+          created_at: Date;
+          updated_at: Date;
+          author?: never;
+        };
+      };
+      comment: {
+        Row: {
+          comment_id: number;
+          post_id: number;
+          author_id: string;
+          author: string;
+          content: string;
+          created_at: Date;
+          updated_at: Date;
+        };
+        Insert: {
+          comment_id?: never;
+          post_id: number;
+          author_id: string;
+          author: string;
+          content: string;
+          created_at: Date;
+          updated_at: Date;
+        };
+        Update: {
+          comment_id?: never;
+          post_id?: never;
+          author_id?: never;
+          author?: never;
+          content: string;
+          created_at: Date;
+          updated_at: Date;
+        };
+      };
     };
   };
 }
