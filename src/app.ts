@@ -18,21 +18,21 @@ app.use(cookieParser());
 app.use(cors());
 
 // 회원가입, 토큰 재발급
-app.use("/signup", authRoutes);
+app.use("/api/signup", authRoutes);
 
 // 로그인, 로그아웃
-app.use("/login", loginRoutes);
+app.use("/api/login", loginRoutes);
 
 // user 라우터
-app.use("/users", userRoutes);
+app.use("/api/users", userRoutes);
 // travel 관련 라우터
-app.use("/travels", travelRoutes);
+app.use("/api/travels", travelRoutes);
 // country 관련 라우터
-app.use("/countries", travelRoutes);
+app.use("/api/countries", travelRoutes);
 
 // 커뮤니티 라우터
-app.use("/post", postRoutes);
-app.use("/comment", commentRoutes);
+app.use("/api/post", postRoutes);
+app.use("/api/comment", commentRoutes);
 
 // swagger API 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
