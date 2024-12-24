@@ -37,4 +37,5 @@ app.use("/api/comment", commentRoutes);
 // swagger API
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(specs));
 
-app.listen(PORT, function () {});
+//app.listen(PORT, function () {});
+module.exports = app;
