@@ -16,7 +16,10 @@ dotenv.config();
 const PORT: number = Number(process.env.PORT) || 3000;
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:5173",
+    credentials: true,
+}));
 
 // 회원가입, 토큰 재발급
 app.use("/api/signup", authRoutes);
