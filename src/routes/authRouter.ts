@@ -39,10 +39,11 @@ router.post("/verify", async (req: Request, res: Response) => {
 
 // 토큰 재발급
 router.post("/token", async (req: Request, res: Response) => {
-  const refreshToken = req.cookies.refreshToken;
+  const refreshToken = req.cookies.refresh_token;
 
   if (!refreshToken) {
     res.status(401).json({ message: "refresh Token을 확인할 수 없습니다." });
+    return;
   }
 
   try {
