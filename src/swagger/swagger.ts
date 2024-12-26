@@ -1,4 +1,3 @@
-import path from "path";
 import swaggerJSDoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 
@@ -13,17 +12,14 @@ const swaggerOptions = {
         },
         servers: [{
             url: process.env.NODE_ENV === 'production'
-                ? "https://your-production-url.vercel.app"
+                ? `https://${process.env.VERCEL_URL}`
                 : "http://localhost:4000"
         }],
     },
-    apis: [
-        path.join(__dirname, './routes/*.swagger.{js,ts}'),
-        path.join(__dirname, './components/*.{js,ts}')
-    ], // 주석을 포함한 파일 경로
+    apis: ["./src/swagger/routes/*.swagger.ts",
+        "./src/swagger/components/*.ts"], // 주석을 포함한 파일 경로
 };
 
-console.log("swagger apis path", __dirname);
 const specs = swaggerJSDoc(swaggerOptions);
 
 
