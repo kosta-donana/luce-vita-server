@@ -24,8 +24,8 @@ class TravelService {
     }
 
     // 여행 생성
-    async createTravel(travelData: Travel) {
-        const insertedTravel = await travelModel.insertTravel(travelData);
+    async createTravel(user_id: string, travelData: Travel) {
+        const insertedTravel = await travelModel.insertTravel(user_id, travelData);
 
         if (!insertedTravel || insertedTravel.length === 0) {
             throw new Error("Failed to create the travel record.");

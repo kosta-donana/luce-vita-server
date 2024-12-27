@@ -18,8 +18,8 @@ class TravelModel {
     }
 
     // 여행 생성
-    async insertTravel(travelData: Travel) {
-        const { data, error } = await supabase.from("travel").insert(travelData).select("*");
+    async insertTravel(user_id: string, travelData: Travel) {
+        const { data, error } = await supabase.from("travel").insert({ user_id, ...travelData }).select("*");
 
         if (error) {
             throw new Error(error.message);

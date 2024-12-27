@@ -1,6 +1,5 @@
 export interface Travel {
     travel_title: string;
-    user_id: string;
     country_no: number;
     local_name: string;
     start_date: string;
@@ -13,6 +12,7 @@ export interface Travel {
 }
 
 export interface ResTravel extends Travel {
+    user_id: string;
     travel_id: string;
     country: {
         currency: string;

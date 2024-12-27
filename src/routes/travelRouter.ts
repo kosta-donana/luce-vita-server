@@ -27,10 +27,16 @@ router.get("/", loginRequired.checkLogin.bind(loginRequired), async (req: Custom
   }
 });
 
-router.post("/", loginRequired.checkLogin.bind(loginRequired), async (req, res) => {
+router.post("/", loginRequired.checkLogin.bind(loginRequired), async (req: CustomRequest, res) => {
+  if (!req.user) {
+    res.status(401).json({ success: false, error: "User not authenticated" });
+    return;
+  }
+
+  const user_id = req.user.id;
   try {
     const travelData = req.body;
-    const createdTravel = await travelService.createTravel(travelData);
+    const createdTravel = await travelService.createTravel(user_id, travelData);
     res.status(200).json({ success: true, data: createdTravel });
   } catch (error) {
     handleError(res, error);
