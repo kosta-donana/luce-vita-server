@@ -36,9 +36,9 @@ class PostService {
     category: string,
     attached_file: string,
     tags: string[]
-  ): Promise<{ success: boolean; data?: any; error?: string }> {
+  ): Promise<any> {
     if (!user) {
-      return { success: false, error: "User not authenticated" };
+      throw new Error("User not authenticated");
     }
 
     const newPost = {
@@ -53,10 +53,10 @@ class PostService {
     const { data, error: insertError } = await supabase.from("post").insert([newPost]).select("*");
 
     if (insertError) {
-      return { success: false, error: insertError.message };
+      throw new Error(insertError.message);
     }
 
-    return { success: true, data: data };
+    return data;
   }
 
   // 게시글 업데이트
@@ -68,9 +68,9 @@ class PostService {
     category: string,
     attached_file: string,
     tags: string[]
-  ): Promise<{ success: boolean; data?: any; error?: string }> {
+  ): Promise<any> {
     if (!user) {
-      return { success: false, error: "User not authenticated" };
+      throw new Error("User not authenticated");
     }
 
     const editPost = {
@@ -89,16 +89,16 @@ class PostService {
       .select("*");
 
     if (updateError) {
-      return { success: false, error: updateError.message };
+      throw new Error(updateError.message);
     }
 
-    return { success: true, data: data };
+    return data;
   }
 
   // 게시글 삭제
-  async deletePost(user: any, post_id: number): Promise<{ success: boolean; data?: any; error?: string }> {
+  async deletePost(user: any, post_id: number): Promise<any> {
     if (!user) {
-      return { success: false, error: "User not authenticated" };
+      throw new Error("User not authenticated");
     }
 
     const { data, error: deleteError } = await supabase
@@ -109,10 +109,10 @@ class PostService {
       .select("*");
 
     if (deleteError) {
-      return { success: false, error: deleteError.message };
+      throw new Error(deleteError.message);
     }
 
-    return { success: true, data: data };
+    return data;
   }
 }
 

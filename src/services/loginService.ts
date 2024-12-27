@@ -25,7 +25,6 @@ class LoginService {
       },
     });
 
-
     if (error) {
       throw new Error(error.message);
     }
@@ -51,6 +50,7 @@ class LogoutService {
     const { error } = await supabase.auth.signOut();
 
     if (error) {
+      throw new Error("Failed to logged out");
     }
   }
 }
@@ -58,4 +58,3 @@ class LogoutService {
 const loginService = new LoginService();
 const logoutService = new LogoutService();
 export { loginService, logoutService };
-
