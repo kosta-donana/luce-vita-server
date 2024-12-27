@@ -43,6 +43,18 @@ router.post("/", loginRequired.checkLogin.bind(loginRequired), async (req: Custo
   }
 });
 
+// 여행 조회
+router.get("/:travel_id", loginRequired.checkLogin.bind(loginRequired), async (req, res) => {
+  try {
+    const travel_id = req.params.travel_id;
+    const fetchedTravel = await travelService.fetchTravel(travel_id);
+
+    res.status(200).json({ success: true, data: fetchedTravel });
+  } catch (error) {
+    handleError(res, error);
+  }
+});
+
 // 여행 업데이트
 router.put("/:travel_id", loginRequired.checkLogin.bind(loginRequired), async (req, res) => {
   try {

@@ -28,6 +28,17 @@ class TravelModel {
         return data;
     }
 
+    // 여행 조회
+    async getTravelByTravelId(travel_id: string) {
+        const { data, error } = await supabase.from("travel").select("*, country(country_name, currency)").eq("travel_id", travel_id);
+
+        if (error) {
+            throw new Error(error.message);
+        }
+
+        return data;
+    }
+
     // 여행 업데이트
     async updateTravelByTravelId(travel_id: string, travelData: Travel) {
         const { data, error } = await supabase.from("travel").update(travelData).eq("travel_id", travel_id).select("*");
