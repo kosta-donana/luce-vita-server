@@ -45,24 +45,18 @@ class VerifyUserService {
 
 class OtpService {
   async sendOtp(email: string, password: string) {
-    console.log(email, password);
     const { data, error } = await supabase.auth.signUp({
       email: email,
       password: password,
     });
 
     if (error) {
-      console.log("인증번호 송신 실패", error.message);
-      throw new Error(error.message);
+      throw new Error("인증번호 송신 실패");
     }
-
-    console.log(data);
     return data;
   }
 
   async verifyOtp(email: string, otp: string) {
-    console.log(email, otp);
-
     const { data, error } = await supabase.auth.verifyOtp({
       email,
       token: otp,
@@ -72,16 +66,12 @@ class OtpService {
     if (error) {
       throw new Error("Verification Failed");
     }
-
-    console.log(data);
     return data;
   }
 }
 
 class TokenService {
   async reissuedToken(refreshToken: string): Promise<{ access_token: string; refresh_token: string }> {
-    console.log(refreshToken);
-
     if (!refreshToken) {
       throw new Error("Refresh Token이 없습니다.");
     }
@@ -98,8 +88,6 @@ class TokenService {
       if (!data || !data.session) {
         throw new Error("새로운 세션 데이터가 없습니다.");
       }
-
-      console.log(data);
       return {
         access_token: data.session.access_token,
         refresh_token: data.session.refresh_token,
