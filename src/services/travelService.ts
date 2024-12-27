@@ -34,6 +34,18 @@ class TravelService {
         return insertedTravel;
     }
 
+    // 여행 조회
+    async fetchTravel(travel_id: string) {
+        const selectedTravel = await travelModel.getTravelByTravelId(travel_id);
+
+        if (!selectedTravel || selectedTravel.length === 0) {
+            throw new Error("Travel not found");
+        }
+
+        return selectedTravel;
+
+    }
+
     // 여행 업데이트
     async updateTravel(travel_id: string, travelData: Travel) {
         const updatedTravel = await travelModel.updateTravelByTravelId(travel_id, travelData);

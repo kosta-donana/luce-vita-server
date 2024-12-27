@@ -88,6 +88,63 @@
  *                   type: string
  *                   example: An unexpected error occurred
  */
+/**
+ * @swagger
+ * /api/travels/{travel_id}:
+ *   get:
+ *     tags: [Travel]
+ *     summary: Retrieve travel details by travel ID
+ *     description: Fetches the details of a specific travel entry using its unique ID.
+ *     parameters:
+ *       - in: path
+ *         name: travel_id
+ *         required: true
+ *         description: The unique identifier of the travel entry to retrieve.
+ *         schema:
+ *           type: string
+ *           format: uuid
+ *           example: "f078c4b1-a0fd-43df-a585-46be21721c20"
+ *     responses:
+ *       200:
+ *         description: Travel entry successfully retrieved.
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: true
+ *                 data:
+ *                   type: array
+ *                   items:
+ *                     allOf:
+ *                       - $ref: '#/components/schemas/Travel'
+ *                       - type: object
+ *                         properties:
+ *                           country:
+ *                            type: object
+ *                            properties:
+ *                              currency:
+ *                                type: string
+ *                                example: CAD
+ *                              country_name:
+ *                                type: string
+ *                                example: 캐나다
+ *       500:
+ *         description: Internal server error
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 success:
+ *                   type: boolean
+ *                   example: false
+ *                 error:
+ *                   type: string
+ *                   example: An unexpected error occurred
+ */
 
 /**
  * @swagger
