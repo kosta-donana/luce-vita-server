@@ -1,14 +1,24 @@
-import { Router } from "express";
+import { User } from "@supabase/supabase-js";
+import { Request, Router } from "express";
 import { loginRequired } from "../middleware/loginRequired";
 import { travelService } from "../services/travelService";
 import { handleError } from "../utils/errorHandle";
 
 const router: Router = Router();
 
-router.get("/:user_id", loginRequired.checkLogin.bind(loginRequired), async (req, res) => {
-  try {
-    const user_id = req.params.user_id;
+interface CustomRequest extends Request {
+  user?: User;
+  role?: string;
+}
 
+router.get("/", loginRequired.checkLogin.bind(loginRequired), async (req: CustomRequest, res) => {
+  if (!req.user) {
+    res.status(401).json({ success: false, error: "User not authenticated" });
+    return;
+  }
+
+  const user_id = req.user.id;
+  try {
     const travelList = await travelService.fetchTravelListByStatus(user_id);
 
     res.status(200).json({ success: true, data: travelList });

@@ -108,7 +108,9 @@
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true,
-    "noImplicitAny": true /* Skip type checking all .d.ts files. */
+    "noImplicitAny": true /* Skip type checking all .d.ts files. */,
+    "typeRoots": ["./node_modules/@types", "./src/types"],
+    "types": ["node", "express"] // 명시적으로 필요한 타입들 지정
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]

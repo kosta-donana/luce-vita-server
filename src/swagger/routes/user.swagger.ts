@@ -6,20 +6,11 @@
  */
 /**
  * @swagger
- * /api/users/{id}:
+ * /api/users:
  *   get:
  *     tags: [User]
  *     summary: Retrieve user and passport information by user ID
  *     description: Retrieves user details along with passport information if available.
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: The ID of the user to retrieve.
- *         schema:
- *           type: string
- *           format: uuid
- *           example: "6b172f54-5ae0-4ec0-af64-7783df38a16d"
  *     responses:
  *       200:
  *         description: Successfully retrieved user and passport information.
@@ -35,7 +26,7 @@
  *                   type: array
  *                   items:
  *                     allOf:
- *                       - $ref: '#/components/schemas/Passport'
+ *                       - $ref: '#/components/schemas/User'
  *                       - type: object
  *                         properties:
  *                           passport:
@@ -68,20 +59,11 @@
 
 /**
  * @swagger
- * /api/users/{id}/deactivate:
+ * /api/users/deactivate:
  *   post:
  *     tags: [User]
  *     summary: Deactivate user account
  *     description: Change the user's is_deleted value from FALSE to TRUE.
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: The ID of the user to deactivate.
- *         schema:
- *           type: string
- *           format: uuid
- *           example: "6b172f54-5ae0-4ec0-af64-7783df38a16d"
  *     responses:
  *       200:
  *         description: Successfully deactivated the user account.
@@ -114,20 +96,11 @@
 
 /**
  * @swagger
- * /api/users/{id}/passport:
+ * /api/users/passport:
  *   post:
  *     tags: [User]
  *     summary: Create or update passport information
  *     description: Checks if a passport exists for the user. If not, inserts a new passport. If exists, updates the passport.
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: The ID of the user for whom the passport information is being created or updated.
- *         schema:
- *           type: string
- *           format: uuid
- *           example: "6b172f54-5ae0-4ec0-af64-7783df38a16d"
  *     requestBody:
  *       required: true
  *       content:
@@ -209,20 +182,11 @@
 
 /**
  * @swagger
- * /api/users/{id}/profile:
+ * /api/users/profile:
  *   put:
  *     tags: [User]
  *     summary: Update user profile
  *     description: Updates the user's profile, including their nickname and profile image
- *     parameters:
- *       - in: path
- *         name: id
- *         required: true
- *         description: The ID of the user whose profile is to be updated.
- *         schema:
- *           type: string
- *           format: uuid
- *           example: "6b172f54-5ae0-4ec0-af64-7783df38a16d"
  *     requestBody:
  *       required: true
  *       content:
