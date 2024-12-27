@@ -4,7 +4,7 @@ import { Passport } from "../types/passport.type";
 class UserModel {
   // 사용자 이메일 조회
   async fetchUserEmail(email: string) {
-    const { data, error } = await supabase.from("user_info").select("user_email").eq("user_eamil", email);
+    const { data, error } = await supabase.from("user_info").select("user_email").eq("user_email", email);
 
     if (error) {
       return [];
@@ -111,4 +111,3 @@ class UserModel {
 
 const userModel = new UserModel();
 export { userModel };
-
