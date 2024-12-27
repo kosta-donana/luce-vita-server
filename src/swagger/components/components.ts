@@ -132,10 +132,6 @@
  *     TravelCreateRequest:
  *       type: object
  *       properties:
- *         user_id:
- *           type: string
- *           format: uuid
- *           example: "6b172f54-5ae0-4ec0-af64-7783df38a16d"
  *         travel_title:
  *           type: string
  *           example: "My First Travel!!"
