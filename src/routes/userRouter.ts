@@ -1,14 +1,25 @@
-import { Router } from "express";
+import { User } from "@supabase/supabase-js";
+import { Request, Router } from "express";
 import { loginRequired } from "../middleware/loginRequired";
 import { userService } from "../services/userService";
 import { handleError } from "../utils/errorHandle";
 
 const router: Router = Router();
 
-// 사용자 정보와 여권 정보 같이 조회하는 함수
-router.get("/:user_id", loginRequired.checkLogin.bind(loginRequired), async (req, res) => {
-  const user_id = req.params.user_id;
+interface CustomRequest extends Request {
+  user?: User;
+  role?: string;
+}
 
+// 사용자 정보와 여권 정보 같이 조회하는 함수
+router.get("/", loginRequired.checkLogin.bind(loginRequired), async (req: CustomRequest, res) => {
+
+  if (!req.user) {
+    res.status(401).json({ success: false, error: "User not authenticated" });
+    return;
+  }
+
+  const user_id = req.user.id;
   try {
     const userInfo = await userService.getUserWithPassportById(user_id);
 
@@ -18,9 +29,14 @@ router.get("/:user_id", loginRequired.checkLogin.bind(loginRequired), async (req
   }
 });
 
-router.post("/:user_id/deactivate", loginRequired.checkLogin.bind(loginRequired), async (req, res) => {
+router.post("/deactivate", loginRequired.checkLogin.bind(loginRequired), async (req: CustomRequest, res) => {
+  if (!req.user) {
+    res.status(401).json({ success: false, error: "User not authenticated" });
+    return;
+  }
+
+  const user_id = req.user.id;
   try {
-    const user_id = req.params.user_id;
     const deletedUser = await userService.deleteUser(user_id);
 
     res.status(200).json({ success: true, data: deletedUser });
@@ -42,9 +58,15 @@ router.get("/validate/:nickname", async (req, res) => {
 });
 
 // 여권 정보 생성 및 수정
-router.post("/:user_id/passport", loginRequired.checkLogin.bind(loginRequired), async (req, res) => {
-  const user_id = req.params.user_id;
+router.post("/passport", loginRequired.checkLogin.bind(loginRequired), async (req: CustomRequest, res) => {
+
+  if (!req.user) {
+    res.status(401).json({ success: false, error: "User not authenticated" });
+    return;
+  }
+
   const passportData = req.body; // 여권 정보
+  const user_id = req.user.id;
 
   try {
     const upsertedPassport = await userService.upsertPassport(user_id, passportData);

@@ -7,20 +7,11 @@
 
 /**
  * @swagger
- * /api/travels/{user_id}:
+ * /api/travels:
  *   get:
  *     tags: [Travel]
  *     summary: Retrieve travel list by user ID
  *     description: Get a list of travels categorized by upcoming, ongoing, and completed trips for a specific user.
- *     parameters:
- *       - in: path
- *         name: user_id
- *         required: true
- *         description: The ID of the user whose travels are being fetched.
- *         schema:
- *           type: string
- *           format: uuid
- *           example: "6b172f54-5ae0-4ec0-af64-7783df38a16d"
  *     responses:
  *       200:
  *         description: Successfully retrieved travel list.
