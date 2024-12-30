@@ -38,6 +38,18 @@ router.post("/deactivate", loginRequired.checkLogin.bind(loginRequired), async (
     const user_id = req.user.id;
     const deletedUser = await userService.deleteUser(user_id);
 
+    // 쿠키 삭제
+    res.clearCookie("access_token", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+    });
+    res.clearCookie("refresh_token", {
+      httpOnly: true,
+      secure: process.env.NODE_ENV === "production",
+      sameSite: "strict",
+    });
+
     res.status(200).json({ success: true, data: deletedUser });
   } catch (error) {
     handleError(res, error);
