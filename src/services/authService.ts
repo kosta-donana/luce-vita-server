@@ -1,5 +1,5 @@
 import { userModel } from "../models/userModel";
-import supabase from "../supabaseClients";
+import supabase, { emailToClient } from "../supabaseClients";
 
 class VerifyUserService {
   private otpService: OtpService;
@@ -35,7 +35,9 @@ class VerifyUserService {
     }
 
     if (data && data.length > 0) {
-      const { error: deleteError } = await supabase.rpc("delete_user_by_email", { user_email: email });
+      const { error: deleteError } = await supabase.rpc("delete_user_by_email", {
+        user_email: email,
+      });
 
       if (deleteError) {
         throw new Error(deleteError.message);
@@ -78,13 +80,16 @@ class OtpService {
 }
 
 class TokenService {
-  async reissuedToken(refreshToken: string): Promise<{ access_token: string; refresh_token: string }> {
+  async reissuedToken(
+    refreshToken: string,
+    email: string
+  ): Promise<{ access_token: string; refresh_token: string }> {
     if (!refreshToken) {
       throw new Error("Refresh Token이 없습니다.");
     }
 
     try {
-      const { data, error } = await supabase.auth.refreshSession({
+      const { data, error } = await emailToClient.get(email).auth.refreshSession({
         refresh_token: refreshToken,
       });
 
