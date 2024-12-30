@@ -17,7 +17,7 @@ class UserModel {
   async deletedUser(email: string): Promise<string[]> {
     const { data, error } = await supabase
       .from("user_info")
-      .select("user_email") // 필요한 필드만 선택
+      .select("user_email, is_deleted") // 필요한 필드만 선택
       .eq("is_deleted", true)
       .eq("user_email", email);
 
