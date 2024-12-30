@@ -47,7 +47,11 @@ router.post("/", loginRequired.checkLogin.bind(loginRequired), async (req: Custo
 router.get("/:travel_id", loginRequired.checkLogin.bind(loginRequired), async (req, res) => {
   try {
     const travel_id = req.params.travel_id;
+
     const fetchedTravel = await travelService.fetchTravel(travel_id);
+
+    // DB 에서 받아온 user_id와 req.user.id랑 비교해서 같으면 리스트 넘기고, 다르면 에러 넘겨라
+
 
     res.status(200).json({ success: true, data: fetchedTravel });
   } catch (error) {

@@ -47,20 +47,21 @@
 링크 목록
 
 - [Luce Vita 앱]()
-- [Luce Vita 서버](https://luce-vita-server-test.vercel.app/)
+- [Luce Vita 서버](https://luce-vita-server.vercel.app/)
 - [Luce Vita DB](https://supabase.com/dashboard/project/xvkskcomnspwcdhmdtzu)
 
 ### 2. 기술 스택
 
 - `TypeScript`: 정적 타입을 도입해 안정성·가독성 향상
-- `Node.js`: 
-- `supabase`:  PostgreSQL 데이터베이스를 기반으로 하며, 인증, 스토리지, 웹 소켓, 서버리스 함수 등의 백엔드 기능을 제공하기에
-- `express`: 
+- `Node.js`:
+- `supabase`: PostgreSQL 데이터베이스를 기반으로 하며, 인증, 스토리지, 웹 소켓, 서버리스 함수 등의 백엔드 기능을 제공하기에
+- `express`: 소규모 프로젝트에 적합하며 빠르고 유연한 웹 애플리케이션 개발에 용이해서
 - `vercel`: 무료로 배포 가능하면서 supabase와의 연결성도 용이해서
 
 ### 3. 느낀 점
 
 ### 4. 기능 (페이지 구성)
+
 1. 로그인
 2. 회원가입
 3. 마이페이지
@@ -69,16 +70,22 @@
 6. 커뮤니티
 
 시연 영상
+
 ### 5. 아쉬웠던 부분
+
 - ..
-  
+
 ### 6. 앞으로 학습할 것들, 나아갈 방향
+
 - ..
-  
+
 ### 7. 어려웠던 부분, 해결한 과정
+
 #### 1) 회원가입 구현
+
 - 이슈1: supabase에서 제공되는 OTP를 연결하여 auth.user에 자동으로 추가되는 유저 정보를 인증이 완료된 시점에서 user_info 테이블로 데이터를 넘기도록 연결하는 것
 - 해결방법: SQL을 이용하여 인증이 완료되는 시점을 기준으로 자동으로 user_info테이블로 데이터가 업데이트 되도록 Trigger 설정 추가
 - 이슈2: 미인증 상태로 회원가입을 중단한 유저가 동일한 계정으로 회원가입 다시 시도 할 때의 로직 구현 (auth.user에 대한 수정 권한이 따로 설정하지 않는 한 없음)
 - 해결방법: rcp 함수를 추가하고, rcp를 통해 해당 user의 계정(이메일)이 auth.user에 존재하는지 확인 후 미인증이라면 해당 데이터 삭제 후 재등록
+
 ---
