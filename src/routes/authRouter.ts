@@ -47,9 +47,9 @@ router.post("/token", async (req: Request, res: Response) => {
   }
 
   try {
-    const tokens = await tokenService.reissuedToken(refreshToken, req.cookies.email);
+    const tokens = await tokenService.reissuedToken(refreshToken);
 
-    setAuthCookies(res, tokens, req.cookies.email);
+    setAuthCookies(res, tokens);
 
     res.status(200).json({ success: true, data: tokens });
   } catch (error) {

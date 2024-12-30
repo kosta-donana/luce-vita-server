@@ -1,5 +1,5 @@
 import { userModel } from "../models/userModel";
-import supabase, { emailToClient } from "../supabaseClients";
+import supabase from "../supabaseClients";
 
 class VerifyUserService {
   private otpService: OtpService;
@@ -80,12 +80,9 @@ class OtpService {
 }
 
 class TokenService {
-  async reissuedToken(
-    refreshToken: string,
-    email: string
-  ): Promise<{ access_token: string; refresh_token: string }> {
+  async reissuedToken(refreshToken: string): Promise<{ access_token: string; refresh_token: string }> {
     try {
-      const { data, error } = await emailToClient.get(email).auth.refreshSession({
+      const { data, error } = await supabase.auth.refreshSession({
         refresh_token: refreshToken,
       });
 

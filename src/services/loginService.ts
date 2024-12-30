@@ -1,5 +1,5 @@
 import { Provider } from "@supabase/supabase-js";
-import supabase, { emailToClient } from "../supabaseClients";
+import supabase from "../supabaseClients";
 import { userModel } from "../models/userModel";
 
 class LoginService {
@@ -11,7 +11,7 @@ class LoginService {
       throw new Error("Deleted User");
     }
 
-    const { data, error } = await emailToClient.get(email).auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signInWithPassword({
       email: email,
       password: password,
     });
