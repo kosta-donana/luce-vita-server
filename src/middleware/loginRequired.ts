@@ -1,14 +1,10 @@
 import { NextFunction, Request, Response } from "express";
-import supabase, { emailToClient } from "../supabaseClients";
+import supabase from "../supabaseClients";
 
 class LoginRequired {
   async checkLogin(req: Request, res: Response, next: NextFunction): Promise<void> {
     try {
-      if (!req.cookies.email) {
-        throw new Error("No email");
-      }
-
-      const { data, error } = await emailToClient.get(req.cookies.email).auth.getUser();
+      const { data, error } = await supabase.auth.getUser();
 
       // 로그인 여부 확인
       if (!data || !data.user || !data.user.id) {
