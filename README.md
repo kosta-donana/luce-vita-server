@@ -52,7 +52,7 @@
 
 ### 2. 기술 스택
 
-- `TypeScript`: 
+- `TypeScript`: 정적 타입을 도입해 안정성·가독성 향상
 - `Node.js`: 
 - `supabase`:  PostgreSQL 데이터베이스를 기반으로 하며, 인증, 스토리지, 웹 소켓, 서버리스 함수 등의 백엔드 기능을 제공하기에
 - `express`: 
