@@ -53,7 +53,7 @@ router.get("/auth/callback", async (req: Request, res: Response) => {
 });
 
 // 로그아웃
-router.post("/logout", async (res: Response) => {
+router.post("/logout", async (req: Request, res: Response) => {
   const logout = await logoutService.logout();
 
   // 쿠키 삭제
