@@ -15,12 +15,12 @@ class VerifyUserService {
 
     // 탈퇴한 사용자 처리
     if (deleted.length > 0) {
-      throw new Error("This account has been deleted. Please contact support.");
+      throw new Error("Deleted User");
     }
 
     // 이미 등록된 사용자 처리
     if (exist.length > 0) {
-      throw new Error("This email is already registered.");
+      throw new Error("Registered User");
     }
 
     await this.invalidUser(email, password);
