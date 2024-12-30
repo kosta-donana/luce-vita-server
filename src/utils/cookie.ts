@@ -5,13 +5,13 @@ const setAuthCookies = (res: Response, tokens: { access_token: string; refresh_t
   res.cookie("access_token", tokens.access_token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
+    sameSite: "none",
     maxAge: 10 * 60 * 1000, // 10분 유지
   });
   res.cookie("refresh_token", tokens.refresh_token, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
+    sameSite: "none",
     maxAge: 14 * 24 * 3600 * 1000, // 14일 유지
   });
 };
