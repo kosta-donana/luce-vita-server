@@ -11,7 +11,7 @@ class LoginService {
       throw new Error("Deleted User");
     }
 
-    const { data, error } = await emailToClient.get("email").auth.signInWithPassword({
+    const { data, error } = await emailToClient.get(email).auth.signInWithPassword({
       email: email,
       password: password,
     });
