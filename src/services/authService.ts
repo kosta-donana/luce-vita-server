@@ -84,10 +84,6 @@ class TokenService {
     refreshToken: string,
     email: string
   ): Promise<{ access_token: string; refresh_token: string }> {
-    if (!refreshToken) {
-      throw new Error("Refresh Token이 없습니다.");
-    }
-
     try {
       const { data, error } = await emailToClient.get(email).auth.refreshSession({
         refresh_token: refreshToken,
