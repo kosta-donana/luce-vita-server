@@ -11,8 +11,15 @@ class VerifyUserService {
   // DB에 이미 등록된 회원인지 검증
   async existingUser(email: string, password: string) {
     const exist = await userModel.fetchUserEmail(email);
+    const deleted = await userModel.deletedUser(email);
 
-    if (exist.includes(email)) {
+    // 탈퇴한 사용자 처리
+    if (deleted.length > 0) {
+      throw new Error("Deleted User");
+    }
+
+    // 이미 등록된 사용자 처리
+    if (exist.length > 0) {
       throw new Error("Registered User");
     }
 

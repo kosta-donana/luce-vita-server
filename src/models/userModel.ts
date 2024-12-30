@@ -3,11 +3,27 @@ import { Passport } from "../types/passport.type";
 
 class UserModel {
   // 사용자 이메일 조회
-  async fetchUserEmail(email: string) {
+  async fetchUserEmail(email: string): Promise<string[]> {
     const { data, error } = await supabase.from("user_info").select("user_email").eq("user_email", email);
 
     if (error) {
       return [];
+    }
+
+    return data ? data.map(row => row.user_email) : [];
+  }
+
+  // 탈퇴 유저 정보 조회
+  async deletedUser(email: string): Promise<string[]> {
+    const { data, error } = await supabase
+      .from("user_info")
+      .select("user_email") // 필요한 필드만 선택
+      .eq("is_deleted", true)
+      .eq("user_email", email);
+
+    if (error) {
+      console.error("Error fetching deleted user:", error.message);
+      throw new Error("Failed to fetch deleted user data.");
     }
 
     return data ? data.map(row => row.user_email) : [];
