@@ -2,6 +2,7 @@ import { Request, Response, Router } from "express";
 import { loginService, logoutService } from "../services/loginService";
 import { setAuthCookies } from "../utils/cookie";
 import { handleError } from "../utils/errorHandle";
+import { emailToClient, setNewClient } from "../supabaseClients";
 
 const router: Router = Router();
 
@@ -9,15 +10,18 @@ const router: Router = Router();
 router.post("/login", async (req: Request, res: Response) => {
   const { email, password } = req.body;
 
+  setNewClient(email);
+
   try {
     const login = await loginService.emailLogin(email, password);
     const tokens = login.session;
 
-    setAuthCookies(res, tokens);
+    setAuthCookies(res, tokens, email);
 
     res.status(200).json({ success: true, data: login });
   } catch (error) {
     handleError(res, error);
+    emailToClient.delete(email);
   }
 });
 
@@ -60,13 +64,22 @@ router.post("/logout", async (req: Request, res: Response) => {
   res.clearCookie("access_token", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
+    sameSite: "none",
   });
   res.clearCookie("refresh_token", {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "strict",
+    sameSite: "none",
   });
+  res.clearCookie("email", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "none",
+  });
+
+  if (req.cookies.email) {
+    emailToClient.delete(req.cookies.email);
+  }
 
   res.json({ success: true, message: "로그아웃 성공" });
 });

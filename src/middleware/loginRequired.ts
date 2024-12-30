@@ -1,11 +1,14 @@
 import { NextFunction, Request, Response } from "express";
-import supabase from "../supabaseClients";
+import supabase, { emailToClient } from "../supabaseClients";
 
 class LoginRequired {
   async checkLogin(req: Request, res: Response, next: NextFunction): Promise<void> {
-
     try {
-      const { data, error } = await supabase.auth.getUser();
+      if (!req.cookies.email) {
+        throw new Error("No email");
+      }
+
+      const { data, error } = await emailToClient.get(req.cookies.email).auth.getUser();
 
       // 로그인 여부 확인
       if (!data || !data.user || !data.user.id) {
@@ -30,15 +33,12 @@ class LoginRequired {
       (req as any).role = roleData.role;
 
       next(); // 다음 미들웨어로 전달
-
     } catch (error) {
       console.error("Error in checkLogin middleware:", error);
       res.status(500).json({ success: false, error: "Internal server error" });
     }
-
   }
 }
 
 const loginRequired = new LoginRequired();
 export { loginRequired };
-
