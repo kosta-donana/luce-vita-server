@@ -13,11 +13,6 @@ interface CustomRequest extends Request {
 
 router.get("/", loginRequired.checkLogin.bind(loginRequired), async (req: CustomRequest, res) => {
   try {
-    if (!req.user) {
-      res.status(401).json({ success: false, error: "User not authenticated" });
-      return;
-    }
-
     const user_id = req.user.id;
     const travelList = await travelService.fetchTravelListByStatus(user_id);
 
@@ -29,11 +24,6 @@ router.get("/", loginRequired.checkLogin.bind(loginRequired), async (req: Custom
 
 router.post("/", loginRequired.checkLogin.bind(loginRequired), async (req: CustomRequest, res) => {
   try {
-    if (!req.user) {
-      res.status(401).json({ success: false, error: "User not authenticated" });
-      return;
-    }
-
     const user_id = req.user.id;
     const travelData = req.body;
     const createdTravel = await travelService.createTravel(user_id, travelData);
