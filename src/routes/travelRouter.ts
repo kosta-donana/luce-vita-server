@@ -13,7 +13,7 @@ interface CustomRequest extends Request {
 
 router.get("/", loginRequired.checkLogin.bind(loginRequired), async (req: CustomRequest, res) => {
   try {
-    const user_id = req.user.id;
+    const user_id = req.user!.id;
     const travelList = await travelService.fetchTravelListByStatus(user_id);
 
     res.status(200).json({ success: true, data: travelList });
@@ -24,7 +24,7 @@ router.get("/", loginRequired.checkLogin.bind(loginRequired), async (req: Custom
 
 router.post("/", loginRequired.checkLogin.bind(loginRequired), async (req: CustomRequest, res) => {
   try {
-    const user_id = req.user.id;
+    const user_id = req.user!.id;
     const travelData = req.body;
     const createdTravel = await travelService.createTravel(user_id, travelData);
     res.status(200).json({ success: true, data: createdTravel });
