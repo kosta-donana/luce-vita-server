@@ -2,13 +2,14 @@
 
 ## 요약
 
-> 여행을 기록하고 관리하는 앱
+> 여행을 예산과 함께 기록하고 관리하는 웹 애플리케이션
 
-.. 대표 이미지 1장 ..
+<img width="306" alt="luce-vita-thumbnail" src="https://github.com/user-attachments/assets/4e7ca018-9adc-4cd6-8b7c-e9a98299ec70" />
+
 
 ## 상세
 
-8번째 PJT (팀 PJT)
+💡 Team Project (FE 2명 | BE 2명)
 
 ### 0. 목차
 
